@@ -35,21 +35,31 @@ button:active{transform:scale(.97)}button:disabled{opacity:.4;cursor:not-allowed
 .game{display:none}.game.show{display:block}.topInfo{display:flex;justify-content:space-between;gap:10px;margin-bottom:15px}.roomMini{color:#777b84;font-size:13px}.round{font-weight:850}
 .scoreboard{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:15px}.scoreCard{background:#fff;border:1px solid #e3e4e8;border-radius:20px;padding:15px;text-align:center}.scoreCard.me{border-color:#17181c}.scoreName{font-size:13px;color:#777b84;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scoreNumber{font-size:35px;font-weight:900}.vs{font-size:12px;font-weight:850;color:#999da5}
 .diceArea{display:grid;grid-template-columns:1fr 1fr;gap:14px}.diceBox{text-align:center;background:#fafafd;border:1px solid #ededf1;border-radius:20px;padding:18px 10px}.diceBox h3{margin:0 0 12px;font-size:15px}.dieTypeLabel{font-size:12px;color:#888c94;margin-bottom:10px}
-.dice{width:128px;height:128px;margin:auto;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);background:#fff;border:2px solid #17181c;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,.08);position:relative}
+.dice{width:128px;height:128px;margin:auto;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);background:#fff;border:2px solid #17181c;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,.08);position:relative;overflow:visible;transition:transform .2s,box-shadow .2s}
+.dice:before{content:"";position:absolute;inset:-9px;border:2px solid transparent;border-radius:32px;pointer-events:none;opacity:0}
+.dice.rolling{box-shadow:0 0 0 6px rgba(23,24,28,.06),0 22px 48px rgba(0,0,0,.18)}
+.dice.reveal{animation:revealDice .65s cubic-bezier(.2,.9,.25,1.25)}
+.dice.reveal:before{animation:revealRing .65s ease-out}
+@keyframes revealDice{0%{transform:scale(.82) rotate(-14deg)}42%{transform:scale(1.15) rotate(8deg)}72%{transform:scale(.96) rotate(-3deg)}100%{transform:scale(1) rotate(0)}}
+@keyframes revealRing{0%{transform:scale(.72);opacity:.8}100%{transform:scale(1.18);opacity:0}}
 .dot{width:16px;height:16px;border-radius:50%;background:#17181c;opacity:0;align-self:center;justify-self:center}
-.dice[data-value="0"]:after{content:"X";position:absolute;inset:0;display:grid;place-items:center;font-size:48px;font-weight:900}
+.dice[data-value="0"]:after{content:"0";position:absolute;inset:0;display:grid;place-items:center;font-size:48px;font-weight:900}
 .dice[data-value="0"] .dot:nth-child(1),.dice[data-value="1"] .dot:nth-child(5),.dice[data-value="2"] .dot:nth-child(1),.dice[data-value="2"] .dot:nth-child(9),.dice[data-value="3"] .dot:nth-child(1),.dice[data-value="3"] .dot:nth-child(5),.dice[data-value="3"] .dot:nth-child(9),.dice[data-value="4"] .dot:nth-child(1),.dice[data-value="4"] .dot:nth-child(3),.dice[data-value="4"] .dot:nth-child(7),.dice[data-value="4"] .dot:nth-child(9),.dice[data-value="5"] .dot:nth-child(1),.dice[data-value="5"] .dot:nth-child(3),.dice[data-value="5"] .dot:nth-child(5),.dice[data-value="5"] .dot:nth-child(7),.dice[data-value="5"] .dot:nth-child(9),.dice[data-value="6"] .dot:nth-child(1),.dice[data-value="6"] .dot:nth-child(3),.dice[data-value="6"] .dot:nth-child(4),.dice[data-value="6"] .dot:nth-child(6),.dice[data-value="6"] .dot:nth-child(7),.dice[data-value="6"] .dot:nth-child(9),.dice[data-value="7"] .dot:nth-child(1),.dice[data-value="7"] .dot:nth-child(3),.dice[data-value="7"] .dot:nth-child(5),.dice[data-value="7"] .dot:nth-child(7),.dice[data-value="7"] .dot:nth-child(9){opacity:1}
-.dice.rolling{animation:roll .65s ease-in-out}@keyframes roll{0%{transform:rotate(0) scale(1)}25%{transform:rotate(12deg) scale(1.08)}50%{transform:rotate(-12deg) scale(.94)}75%{transform:rotate(8deg) scale(1.05)}100%{transform:rotate(0) scale(1)}}
+.dice.rolling{animation:roll 1.25s cubic-bezier(.25,.8,.25,1)}
+@keyframes roll{0%{transform:translateY(0) rotate(0) scale(1)}12%{transform:translateY(-12px) rotate(55deg) scale(1.08)}25%{transform:translateY(5px) rotate(-70deg) scale(.92)}40%{transform:translateY(-18px) rotate(125deg) scale(1.1)}55%{transform:translateY(4px) rotate(185deg) scale(.95)}70%{transform:translateY(-12px) rotate(250deg) scale(1.06)}85%{transform:translateY(2px) rotate(320deg) scale(.98)}100%{transform:translateY(0) rotate(360deg) scale(1)}}
 .result{text-align:center;min-height:30px;margin:18px 0;font-size:17px;font-weight:850}.rollArea{text-align:center}.rollState{font-size:13px;color:#858991;margin-top:10px}.gameHelp{text-align:center;color:#898d95;font-size:13px;margin-top:12px}
 .roundResult{margin:12px 0;padding:12px;border-radius:14px;background:#f5f6f8;text-align:center;font-weight:750}
 .overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(247,248,252,.88);backdrop-filter:blur(13px)}.overlay.show{display:flex}.modal{width:min(430px,100%);padding:30px 24px;background:#fff;border:1px solid #e2e3e7;border-radius:26px;text-align:center;box-shadow:0 20px 65px rgba(0,0,0,.15)}.modalEmoji{font-size:54px}.modal h2{margin:12px 0 8px;font-size:28px}.modal p{margin:0 0 20px;color:#777b84}.modalActions{display:flex;gap:9px}.modalActions button{flex:1}
 @media(max-width:650px){.hero h1{font-size:35px}.panel{padding:18px}.players,.dieGrid{grid-template-columns:1fr}.dice{width:105px;height:105px}.dot{width:13px;height:13px}.scoreNumber{font-size:30px}.diceArea{gap:7px}.diceBox{padding:14px 5px}}
+
+.fatalError{display:none;position:fixed;left:14px;right:14px;bottom:14px;z-index:9999;background:#fff1f0;color:#9f1c16;border:1px solid #f0b7b2;border-radius:14px;padding:13px 15px;font-size:12px;line-height:1.5;box-shadow:0 10px 30px rgba(0,0,0,.12)}
+.fatalError.show{display:block}
 </style>
 </head>
 <body>
 <header class="header"><a class="logo" href="https://semicolonxss.github.io/Formwheel/" aria-label="FormWheel 메인">Form<span class="logoWheel"></span>Wheel</a></header>
 <main class="container">
-<section class="hero"><h1>Dice Duel</h1><p>6가지 속성 주사위로 최대 5라운드 대결!</p></section>
+<section class="hero"><h1>Dice Duel</h1><p>10가지 속성 주사위로 최대 5라운드 대결!</p></section>
 <section id="lobby" class="panel">
 <h2 class="panelTitle">🎲 Dice Duel 시작</h2>
 <input id="nickname" maxlength="12" autocomplete="off" placeholder="닉네임을 입력하세요">
@@ -69,8 +79,8 @@ button:active{transform:scale(.97)}button:disabled{opacity:.4;cursor:not-allowed
 <div class="topInfo"><div class="roomMini">ROOM <strong id="miniRoomCode">----</strong></div><div id="roundText" class="round">ROUND 1 / 5</div></div>
 <div class="scoreboard"><div id="scoreCard1" class="scoreCard"><div id="gameName1" class="scoreName">PLAYER 1</div><div id="gameScore1" class="scoreNumber">0</div></div><div class="vs">VS</div><div id="scoreCard2" class="scoreCard"><div id="gameName2" class="scoreName">PLAYER 2</div><div id="gameScore2" class="scoreNumber">0</div></div></div>
 <div class="diceArea">
-<div class="diceBox"><h3 id="diceName1">PLAYER 1</h3><div id="dieType1" class="dieTypeLabel">-</div><div id="dice1" class="dice" data-value="1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState1" class="rollState">아직 굴리지 않음</div></div>
-<div class="diceBox"><h3 id="diceName2">PLAYER 2</h3><div id="dieType2" class="dieTypeLabel">-</div><div id="dice2" class="dice" data-value="1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState2" class="rollState">아직 굴리지 않음</div></div>
+<div class="diceBox"><h3 id="diceName1">PLAYER 1</h3><div id="dieType1" class="dieTypeLabel">-</div><div id="dice1" class="dice" data-value="1" aria-label="주사위 눈 1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState1" class="rollState">아직 굴리지 않음</div></div>
+<div class="diceBox"><h3 id="diceName2">PLAYER 2</h3><div id="dieType2" class="dieTypeLabel">-</div><div id="dice2" class="dice" data-value="1" aria-label="주사위 눈 1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState2" class="rollState">아직 굴리지 않음</div></div>
 </div>
 <div id="result" class="result">각자의 주사위를 굴려주세요!</div>
 <div class="rollArea"><button id="rollBtn" class="primary">🎲 내 주사위 굴리기</button></div>
@@ -78,8 +88,27 @@ button:active{transform:scale(.97)}button:disabled{opacity:.4;cursor:not-allowed
 <div id="gameHelp" class="gameHelp">각자 한 번씩 주사위를 굴립니다.</div>
 </div></section>
 </main>
+<div id="fatalError" class="fatalError"></div>
 <div id="overlay" class="overlay"><div class="modal"><div id="modalEmoji" class="modalEmoji">🏆</div><h2 id="winnerTitle">승리!</h2><p id="winnerText">게임이 끝났습니다.</p><div class="modalActions"><button id="rematchBtn" class="primary">다시 대결</button><button id="leaveBtn" class="secondary">로비</button></div></div></div>
 
+
+<script>
+window.addEventListener("error",function(e){
+  var box=document.getElementById("fatalError");
+  if(box){
+    box.textContent="Dice Duel 오류: "+(e.message||"알 수 없는 오류")+" · F12 개발자도구 Console에서 자세한 내용을 확인할 수 있습니다.";
+    box.classList.add("show");
+  }
+});
+window.addEventListener("unhandledrejection",function(e){
+  var box=document.getElementById("fatalError");
+  if(box){
+    var reason=e.reason&&e.reason.message?e.reason.message:String(e.reason||"Promise 오류");
+    box.textContent="Dice Duel 오류: "+reason;
+    box.classList.add("show");
+  }
+});
+</script>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 import{getDatabase,ref,set,get,update,onValue,onDisconnect}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
@@ -89,15 +118,20 @@ const app=initializeApp(firebaseConfig),db=getDatabase(app);
 const MAX_ROUNDS=5,ROOT="diceDuel";
 
 const DICE={
-flame:{name:"화염 주사위",icon:"🔥",desc:"7 가중치 +10%",counter:"wind"},
-ice:{name:"얼음 주사위",icon:"❄️",desc:"상대 X(0) 가중치 +10%",counter:"flame"},
-electric:{name:"전기 주사위",icon:"⚡",desc:"내 1 제거",counter:"ice"},
-poison:{name:"독 주사위",icon:"☠️",desc:"상대 3~6 중 하나 봉쇄",counter:"electric"},
-wind:{name:"바람 주사위",icon:"🌪️",desc:"내 X(0) 제거",counter:"poison"},
-gold:{name:"황금 주사위",icon:"✨",desc:"5·6 가중치 +10%",counter:null}
+flame:{name:"화염 주사위",icon:"🔥",desc:"7 가중치 +10% · 바람에 강함",counter:"wind"},
+ice:{name:"얼음 주사위",icon:"❄️",desc:"상대 0 가중치 +10% · 화염에 강함",counter:"flame"},
+electric:{name:"전기 주사위",icon:"⚡",desc:"내 1 제거 · 얼음에 강함",counter:"ice"},
+poison:{name:"독 주사위",icon:"☠️",desc:"상대 3~6 중 하나 봉쇄 · 전기에 강함",counter:"electric"},
+wind:{name:"바람 주사위",icon:"🌪️",desc:"내 0 제거 · 독에 강함",counter:"poison"},
+gold:{name:"황금 주사위",icon:"✨",desc:"5·6 가중치 +10% · 수정에 약함",counter:null},
+rainbow:{name:"무지개 주사위",icon:"🌈",desc:"1~7 전체 +8% · 0 가중치 감소",counter:"shadow"},
+shadow:{name:"그림자 주사위",icon:"🌑",desc:"6·7 가중치 +20% · 무지개에 강함",counter:"rainbow"},
+crystal:{name:"수정 주사위",icon:"💎",desc:"2·4 가중치 +25% · 상대 1·2 감소",counter:"gold"},
+lucky:{name:"행운 주사위",icon:"🍀",desc:"5·6·7 가중치 +18% · 0 가중치 대폭 감소",counter:"crystal"}
 };
 
 let myId="",myRole="",myNickname="",currentRoom="",roomData=null,roomListener=null,lastRollSeen="",resolvingRound=false,animating=false,winnerShown=false;
+let animationRoundKey="",animationDone={1:false,2:false},animationStarted={1:false,2:false},revealedRoundKey="";
 const $=id=>document.getElementById(id);
 const lobby=$("lobby"),waiting=$("waiting"),game=$("game"),nickname=$("nickname"),roomInput=$("roomInput"),lobbyStatus=$("lobbyStatus"),joinBox=$("joinBox");
 const createBtn=$("createBtn"),showJoinBtn=$("showJoinBtn"),joinBtn=$("joinBtn"),roomCodeText=$("roomCodeText"),copyRoomBtn=$("copyRoomBtn");
@@ -112,7 +146,10 @@ function nick(){return nickname.value.trim().replace(/\s+/g," ").slice(0,12)}
 function status(el,msg,type=""){el.textContent=msg;el.className="status"+(type?" "+type:"")}
 function playerNo(){return myRole==="host"?1:2}
 function outcomeText(v){return v===0?"X":String(v)}
-function setDice(el,v){el.dataset.value=String(v)}
+function setDice(el,v){
+el.dataset.value=String(v);
+el.setAttribute("aria-label","주사위 눈 "+String(v));
+}
 
 function renderDieChoices(){
 dieGrid.innerHTML="";
@@ -138,30 +175,67 @@ choiceStatus.className="status"+(selected?" success":"");
 function weightedRoll(selfDie,opponentDie){
 const weights={0:1,1:1,2:1,3:1,4:1,5:1,6:1,7:1};
 const self=DICE[selfDie];
+
 if(selfDie==="flame")weights[7]*=1.10;
 if(selfDie==="electric")weights[1]=0;
 if(selfDie==="wind")weights[0]=0;
 if(selfDie==="gold"){weights[5]*=1.10;weights[6]*=1.10}
+if(selfDie==="rainbow"){for(let i=1;i<=7;i++)weights[i]*=1.08;weights[0]*=.80}
+if(selfDie==="shadow"){weights[6]*=1.20;weights[7]*=1.20}
+if(selfDie==="crystal"){weights[2]*=1.25;weights[4]*=1.25}
+if(selfDie==="lucky"){weights[5]*=1.18;weights[6]*=1.18;weights[7]*=1.18;weights[0]*=.50}
+
 if(opponentDie==="ice")weights[0]*=1.10;
-if(opponentDie==="poison"){const blocked=[3,4,5,6][Math.floor(Math.random()*4)];weights[blocked]=0}
-if(self&&self.counter===opponentDie)[5,6,7].forEach(v=>weights[v]*=1.10);
+if(opponentDie==="poison"){
+  const blocked=[3,4,5,6][Math.floor(Math.random()*4)];
+  weights[blocked]=0;
+}
+if(opponentDie==="crystal"){weights[1]*=.90;weights[2]*=.90}
+
+if(self&&self.counter===opponentDie){
+  [5,6,7].forEach(v=>weights[v]*=1.10);
+}
+
 const total=Object.values(weights).reduce((a,b)=>a+b,0);
 let r=Math.random()*total;
-for(const[k,w]of Object.entries(weights)){r-=w;if(r<0)return Number(k)}
+for(const[k,w]of Object.entries(weights)){
+  r-=w;
+  if(r<0)return Number(k);
+}
 return 0;
 }
 
 function animateDice(el,finalValue){
-el.classList.remove("rolling");void el.offsetWidth;el.classList.add("rolling");
-let count=0;
-const timer=setInterval(()=>{
-setDice(el,Math.floor(Math.random()*8));count++;
-if(count>=8){clearInterval(timer);setDice(el,finalValue);setTimeout(()=>el.classList.remove("rolling"),120)}
+return new Promise(resolve=>{
+  el.classList.remove("rolling","reveal");
+  void el.offsetWidth;
+  el.classList.add("rolling");
+
+  let count=0;
+  const totalFrames=16;
+
+  const timer=setInterval(()=>{
+    setDice(el,Math.floor(Math.random()*8));
+    count++;
+
+    if(count>=totalFrames){
+      clearInterval(timer);
+      setDice(el,finalValue);
+      el.classList.remove("rolling");
+      el.classList.add("reveal");
+
+      setTimeout(()=>{
+        el.classList.remove("reveal");
+        resolve();
+      },650);
+    }
+  },78);
+});
 },75);
 }
 function showRoundAnimation(msg){
 roundResult.style.display="block";roundResult.textContent=msg;
-setTimeout(()=>{if(roundResult)roundResult.style.display="none"},850);
+setTimeout(()=>{if(roundResult)roundResult.style.display="none"},1400);
 }
 
 function updateWaiting(){
@@ -186,24 +260,86 @@ dieType1.textContent=(DICE[roomData.player1?.die]?.icon||"")+" "+(DICE[roomData.
 dieType2.textContent=(DICE[roomData.player2?.die]?.icon||"")+" "+(DICE[roomData.player2?.die]?.name||"-");
 roundText.textContent="ROUND "+(roomData.round||1)+" / "+MAX_ROUNDS;
 
-if(roomData.dice1!==null&&roomData.dice1!==undefined)setDice(dice1,roomData.dice1);
-if(roomData.dice2!==null&&roomData.dice2!==undefined)setDice(dice2,roomData.dice2);
 const r=roomData.roundResults||{};
-rollState1.textContent=r["1"]==null?"아직 굴리지 않음":"결과: "+outcomeText(r["1"]);
-rollState2.textContent=r["2"]==null?"아직 굴리지 않음":"결과: "+outcomeText(r["2"]);
+const currentRoundKey=String(roomData.round||1);
+
+if(animationRoundKey!==currentRoundKey){
+  animationRoundKey=currentRoundKey;
+  animationDone={1:false,2:false};
+  animationStarted={1:false,2:false};
+  revealedRoundKey="";
+  result.textContent="각자의 주사위를 굴려주세요!";
+  roundResult.style.display="none";
+}
+
+rollState1.textContent=r["1"]==null?"아직 굴리지 않음":"결과 공개 준비 완료";
+rollState2.textContent=r["2"]==null?"아직 굴리지 않음":"결과 공개 준비 완료";
+
+const startAnimation=(who,value)=>{
+  if(value===null||value===undefined||animationStarted[who])return;
+  animationStarted[who]=true;
+
+  animateDice(who===1?dice1:dice2,value).then(()=>{
+    animationDone[who]=true;
+    tryRevealRound();
+  });
+};
 
 if(roomData.lastRollEvent&&roomData.lastRollEvent!==lastRollSeen){
-lastRollSeen=roomData.lastRollEvent;
-const who=roomData.lastRollPlayer,value=who===1?roomData.dice1:roomData.dice2;
-if(value!==null&&value!==undefined)animateDice(who===1?dice1:dice2,value);
+  lastRollSeen=roomData.lastRollEvent;
+  const who=roomData.lastRollPlayer;
+  const value=who===1?roomData.dice1:roomData.dice2;
+  startAnimation(who,value);
 }
-result.textContent=roomData.lastResult||"각자의 주사위를 굴려주세요!";
+
+if(r["1"]!=null&&r["2"]!=null){
+  // 새로고침/재접속 시에도 두 결과를 정상적으로 다시 연출한다.
+  startAnimation(1,r["1"]);
+  startAnimation(2,r["2"]);
+}
+
+if(!revealedRoundKey){
+  result.textContent=(r["1"]!=null||r["2"]!=null)
+    ?"🎲 주사위를 굴리는 중..."
+    :"각자의 주사위를 굴려주세요!";
+}
 const me=playerNo(),mine=r[String(me)];
 rollBtn.disabled=mine!=null||roomData.roundState==="resolving"||roomData.status==="finished";
 gameHelp.textContent=roomData.roundState==="resolving"?"라운드 결과를 계산하는 중...":"두 플레이어가 모두 굴리면 라운드가 자동 처리됩니다.";
 
 if(r["1"]!=null&&r["2"]!=null&&myRole==="host"&&roomData.roundState==="rolling")resolveRound();
 if(roomData.status==="finished")showWinner();
+}
+
+function tryRevealRound(){
+const r=roomData?.roundResults||{};
+const key=String(roomData?.round||1);
+
+if(r["1"]==null||r["2"]==null)return;
+if(!animationDone[1]||!animationDone[2])return;
+if(revealedRoundKey===key)return;
+
+revealedRoundKey=key;
+
+result.textContent=roomData.lastResult||("결과: "+outcomeText(r["1"])+" : "+outcomeText(r["2"]));
+rollState1.textContent="결과: "+outcomeText(r["1"]);
+rollState2.textContent="결과: "+outcomeText(r["2"]);
+
+showRoundAnimation("🎉 ROUND "+roomData.round+" 결과 공개!");
+}
+
+
+function revealRoundResult(){
+const r=roomData?.roundResults||{};
+const key=String(roomData?.round||1);
+if(r["1"]==null||r["2"]==null)return;
+if(!animationDone[1]||!animationDone[2])return;
+if(revealedRoundKey===key)return;
+revealedRoundKey=key;
+rollState1.textContent="결과: "+outcomeText(r["1"]);
+rollState2.textContent="결과: "+outcomeText(r["2"]);
+result.textContent=roomData.lastResult||("결과: "+outcomeText(r["1"])+" : "+outcomeText(r["2"]));
+showRoundAnimation("🎉 ROUND "+roomData.round+" 결과 공개!");
 }
 
 async function createRoom(){
@@ -273,7 +409,7 @@ else msg="🤝 라운드 무승부! "+outcomeText(a)+" : "+outcomeText(b);
 try{
 await update(roomRef(),{roundState:"resolving",roundWinner:a>b?1:b>a?2:0,lastResult:msg,"player1/score":s1,"player2/score":s2});
 showRoundAnimation(msg);
-await new Promise(r=>setTimeout(r,900));
+await new Promise(r=>setTimeout(r,2200));
 const fresh=await get(roomRef());if(!fresh.exists())return;const d=fresh.val();
 if(d.status!=="playing"||d.round!==round||d.roundState!=="resolving")return;
 if(round>=MAX_ROUNDS){
