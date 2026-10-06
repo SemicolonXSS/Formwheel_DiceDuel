@@ -9,219 +9,100 @@
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f7f8fc;color:#17181c}
 body{padding-bottom:50px}
-.header{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;padding:0 22px;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #e7e8ec}
-.logo{display:inline-flex;align-items:center;gap:4px;color:#17181c;text-decoration:none;font-size:22px;font-weight:850;letter-spacing:-.8px}
-.logoWheel{width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;border:3px solid #17181c;border-radius:50%;position:relative;font-size:0}
+.header{position:sticky;top:0;z-index:20;height:64px;display:flex;align-items:center;padding:0 22px;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid #e7e8ec}
+.logo{display:inline-flex;align-items:center;gap:4px;color:#17181c;text-decoration:none;font-size:22px;font-weight:850}
+.logoWheel{width:25px;height:25px;display:inline-flex;align-items:center;justify-content:center;border:3px solid #17181c;border-radius:50%;position:relative}
 .logoWheel:before,.logoWheel:after{content:"";position:absolute;background:#17181c;border-radius:99px}
-.logoWheel:before{width:3px;height:15px}
-.logoWheel:after{width:15px;height:3px}
+.logoWheel:before{width:3px;height:15px}.logoWheel:after{width:15px;height:3px}
 .container{width:min(940px,calc(100% - 28px));margin:auto}
-.hero{text-align:center;padding:42px 0 25px}
-.hero h1{margin:0;font-size:42px;letter-spacing:-2px}
-.hero p{margin:9px 0 0;color:#777b84;font-size:14px}
+.hero{text-align:center;padding:42px 0 25px}.hero h1{margin:0;font-size:42px;letter-spacing:-2px}.hero p{margin:9px 0 0;color:#777b84;font-size:14px}
 .panel{background:#fff;border:1px solid #e3e4e8;border-radius:25px;padding:24px;box-shadow:0 12px 35px rgba(20,20,30,.055);margin-bottom:18px}
 .panelTitle{margin:0 0 17px;font-size:20px}
 input{width:100%;border:1px solid #dfe1e6;background:#fafafd;border-radius:14px;padding:14px;outline:none;font-size:15px}
-input:focus{border-color:#17181c;background:#fff}
 button{border:0;border-radius:14px;padding:13px 18px;font:inherit;font-size:15px;font-weight:750;cursor:pointer;transition:.15s}
-button:active{transform:scale(.97)}
-button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+button:active{transform:scale(.97)}button:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .primary{color:#fff;background:#17181c}.secondary{color:#17181c;background:#eef0f3}.full{width:100%}
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .status{margin-top:14px;padding:13px 15px;border-radius:14px;background:#f5f6f8;color:#666a72;text-align:center;font-size:14px}
 .error{color:#b42318;background:#fff1f0}.success{color:#176b35;background:#effaf2}
 .joinBox{display:none;margin-top:14px}
-.roomCode{text-align:center;background:#f5f6f8;border-radius:19px;padding:17px;margin-bottom:20px}
-.roomCode small{display:block;color:#777b84;margin-bottom:4px}.roomCode strong{font-size:35px;letter-spacing:6px}
+.roomCode{text-align:center;background:#f5f6f8;border-radius:19px;padding:17px;margin-bottom:20px}.roomCode small{display:block;color:#777b84;margin-bottom:4px}.roomCode strong{font-size:35px;letter-spacing:6px}
 .copyButton{margin-top:9px;padding:8px 14px;font-size:13px}
-.players{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.player{padding:16px;border:1px solid #e4e5e9;border-radius:18px;text-align:center;background:#fafafd}
-.player.me{border-color:#17181c}.playerName{font-weight:800}.playerRole{color:#898d95;font-size:12px;margin-top:4px}
+.players{display:grid;grid-template-columns:1fr 1fr;gap:12px}.player{padding:16px;border:1px solid #e4e5e9;border-radius:18px;text-align:center;background:#fafafd}.player.me{border-color:#17181c}.playerName{font-weight:800}.playerRole{color:#898d95;font-size:12px;margin-top:4px}
 .waitingActions{text-align:center;margin-top:18px}
-.dieGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.dieCard{border:1px solid #e3e4e8;background:#fff;border-radius:19px;padding:16px;cursor:pointer;transition:.15s}
-.dieCard:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.06)}
-.dieCard.selected{border:2px solid #17181c;padding:15px}
-.dieTop{display:flex;align-items:center;gap:10px}
-.dieIcon{font-size:30px}.dieName{font-weight:850}.dieDesc{margin:8px 0 0;color:#72767e;font-size:13px;line-height:1.45}
-.selectedBadge{margin-left:auto;font-size:11px;font-weight:800;background:#17181c;color:#fff;padding:5px 8px;border-radius:99px}
-.game{display:none}.game.show{display:block}
-.topInfo{display:flex;justify-content:space-between;gap:10px;margin-bottom:15px}.roomMini{color:#777b84;font-size:13px}.round{font-weight:850}
-.scoreboard{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:15px}
-.scoreCard{background:#fff;border:1px solid #e3e4e8;border-radius:20px;padding:15px;text-align:center}.scoreCard.me{border-color:#17181c}
-.scoreName{font-size:13px;color:#777b84;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.scoreNumber{font-size:35px;font-weight:900}.vs{font-size:12px;font-weight:850;color:#999da5}
-.diceArea{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.diceBox{text-align:center;background:#fafafd;border:1px solid #ededf1;border-radius:20px;padding:18px 10px}
-.diceBox h3{margin:0 0 12px;font-size:15px}
-.dieTypeLabel{font-size:12px;color:#888c94;margin-bottom:10px}
-.dice{width:128px;height:128px;margin:auto;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);background:#fff;border:2px solid #17181c;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+.dieGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.dieCard{border:1px solid #e3e4e8;background:#fff;border-radius:19px;padding:16px;cursor:pointer;transition:.15s}.dieCard:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.06)}.dieCard.selected{border:2px solid #17181c;padding:15px}
+.dieTop{display:flex;align-items:center;gap:10px}.dieIcon{font-size:30px}.dieName{font-weight:850}.dieDesc{margin:8px 0 0;color:#72767e;font-size:13px;line-height:1.45}.selectedBadge{margin-left:auto;font-size:11px;font-weight:800;background:#17181c;color:#fff;padding:5px 8px;border-radius:99px}
+.game{display:none}.game.show{display:block}.topInfo{display:flex;justify-content:space-between;gap:10px;margin-bottom:15px}.roomMini{color:#777b84;font-size:13px}.round{font-weight:850}
+.scoreboard{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-bottom:15px}.scoreCard{background:#fff;border:1px solid #e3e4e8;border-radius:20px;padding:15px;text-align:center}.scoreCard.me{border-color:#17181c}.scoreName{font-size:13px;color:#777b84;font-weight:750;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.scoreNumber{font-size:35px;font-weight:900}.vs{font-size:12px;font-weight:850;color:#999da5}
+.diceArea{display:grid;grid-template-columns:1fr 1fr;gap:14px}.diceBox{text-align:center;background:#fafafd;border:1px solid #ededf1;border-radius:20px;padding:18px 10px}.diceBox h3{margin:0 0 12px;font-size:15px}.dieTypeLabel{font-size:12px;color:#888c94;margin-bottom:10px}
+.dice{width:128px;height:128px;margin:auto;padding:14px;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);background:#fff;border:2px solid #17181c;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,.08);position:relative}
 .dot{width:16px;height:16px;border-radius:50%;background:#17181c;opacity:0;align-self:center;justify-self:center}
-.dice[data-value="0"] .dot:nth-child(1),
-.dice[data-value="1"] .dot:nth-child(5),
-.dice[data-value="2"] .dot:nth-child(1),.dice[data-value="2"] .dot:nth-child(9),
-.dice[data-value="3"] .dot:nth-child(1),.dice[data-value="3"] .dot:nth-child(5),.dice[data-value="3"] .dot:nth-child(9),
-.dice[data-value="4"] .dot:nth-child(1),.dice[data-value="4"] .dot:nth-child(3),.dice[data-value="4"] .dot:nth-child(7),.dice[data-value="4"] .dot:nth-child(9),
-.dice[data-value="5"] .dot:nth-child(1),.dice[data-value="5"] .dot:nth-child(3),.dice[data-value="5"] .dot:nth-child(5),.dice[data-value="5"] .dot:nth-child(7),.dice[data-value="5"] .dot:nth-child(9),
-.dice[data-value="6"] .dot:nth-child(1),.dice[data-value="6"] .dot:nth-child(3),.dice[data-value="6"] .dot:nth-child(4),.dice[data-value="6"] .dot:nth-child(6),.dice[data-value="6"] .dot:nth-child(7),.dice[data-value="6"] .dot:nth-child(9),
-.dice[data-value="7"] .dot:nth-child(1),.dice[data-value="7"] .dot:nth-child(3),.dice[data-value="7"] .dot:nth-child(5),.dice[data-value="7"] .dot:nth-child(7),.dice[data-value="7"] .dot:nth-child(9){opacity:1}
-.dice[data-value="0"]:after{content:"X";position:absolute;font-size:48px;font-weight:900}
-.dice{position:relative}
-.dice.rolling{animation:roll .65s ease-in-out}
-@keyframes roll{0%{transform:rotate(0) scale(1)}25%{transform:rotate(12deg) scale(1.08)}50%{transform:rotate(-12deg) scale(.94)}75%{transform:rotate(8deg) scale(1.05)}100%{transform:rotate(0) scale(1)}}
-.result{text-align:center;min-height:30px;margin:18px 0;font-size:17px;font-weight:850}
-.rollArea{text-align:center}
-.rollState{font-size:13px;color:#858991;margin-top:10px}
-.nextArea{text-align:center;margin-top:15px}.nextArea small{display:block;color:#858991;margin-bottom:8px}
-.gameHelp{text-align:center;color:#898d95;font-size:13px;margin-top:12px}
-.overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(247,248,252,.88);backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
-.overlay.show{display:flex}.modal{width:min(430px,100%);padding:30px 24px;background:#fff;border:1px solid #e2e3e7;border-radius:26px;text-align:center;box-shadow:0 20px 65px rgba(0,0,0,.15)}
-.modalEmoji{font-size:54px}.modal h2{margin:12px 0 8px;font-size:28px}.modal p{margin:0 0 20px;color:#777b84}.modalActions{display:flex;gap:9px}.modalActions button{flex:1}
+.dice[data-value="0"]:after{content:"X";position:absolute;inset:0;display:grid;place-items:center;font-size:48px;font-weight:900}
+.dice[data-value="0"] .dot:nth-child(1),.dice[data-value="1"] .dot:nth-child(5),.dice[data-value="2"] .dot:nth-child(1),.dice[data-value="2"] .dot:nth-child(9),.dice[data-value="3"] .dot:nth-child(1),.dice[data-value="3"] .dot:nth-child(5),.dice[data-value="3"] .dot:nth-child(9),.dice[data-value="4"] .dot:nth-child(1),.dice[data-value="4"] .dot:nth-child(3),.dice[data-value="4"] .dot:nth-child(7),.dice[data-value="4"] .dot:nth-child(9),.dice[data-value="5"] .dot:nth-child(1),.dice[data-value="5"] .dot:nth-child(3),.dice[data-value="5"] .dot:nth-child(5),.dice[data-value="5"] .dot:nth-child(7),.dice[data-value="5"] .dot:nth-child(9),.dice[data-value="6"] .dot:nth-child(1),.dice[data-value="6"] .dot:nth-child(3),.dice[data-value="6"] .dot:nth-child(4),.dice[data-value="6"] .dot:nth-child(6),.dice[data-value="6"] .dot:nth-child(7),.dice[data-value="6"] .dot:nth-child(9),.dice[data-value="7"] .dot:nth-child(1),.dice[data-value="7"] .dot:nth-child(3),.dice[data-value="7"] .dot:nth-child(5),.dice[data-value="7"] .dot:nth-child(7),.dice[data-value="7"] .dot:nth-child(9){opacity:1}
+.dice.rolling{animation:roll .65s ease-in-out}@keyframes roll{0%{transform:rotate(0) scale(1)}25%{transform:rotate(12deg) scale(1.08)}50%{transform:rotate(-12deg) scale(.94)}75%{transform:rotate(8deg) scale(1.05)}100%{transform:rotate(0) scale(1)}}
+.result{text-align:center;min-height:30px;margin:18px 0;font-size:17px;font-weight:850}.rollArea{text-align:center}.rollState{font-size:13px;color:#858991;margin-top:10px}.gameHelp{text-align:center;color:#898d95;font-size:13px;margin-top:12px}
+.roundResult{margin:12px 0;padding:12px;border-radius:14px;background:#f5f6f8;text-align:center;font-weight:750}
+.overlay{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(247,248,252,.88);backdrop-filter:blur(13px)}.overlay.show{display:flex}.modal{width:min(430px,100%);padding:30px 24px;background:#fff;border:1px solid #e2e3e7;border-radius:26px;text-align:center;box-shadow:0 20px 65px rgba(0,0,0,.15)}.modalEmoji{font-size:54px}.modal h2{margin:12px 0 8px;font-size:28px}.modal p{margin:0 0 20px;color:#777b84}.modalActions{display:flex;gap:9px}.modalActions button{flex:1}
 @media(max-width:650px){.hero h1{font-size:35px}.panel{padding:18px}.players,.dieGrid{grid-template-columns:1fr}.dice{width:105px;height:105px}.dot{width:13px;height:13px}.scoreNumber{font-size:30px}.diceArea{gap:7px}.diceBox{padding:14px 5px}}
 </style>
 </head>
 <body>
-<header class="header">
-<a class="logo" href="https://semicolonxss.github.io/Formwheel/" aria-label="FormWheel 메인">
-Form<span class="logoWheel"></span>Wheel
-</a>
-</header>
-
+<header class="header"><a class="logo" href="https://semicolonxss.github.io/Formwheel/" aria-label="FormWheel 메인">Form<span class="logoWheel"></span>Wheel</a></header>
 <main class="container">
-<section class="hero">
-<h1>Dice Duel</h1>
-<p>나만의 주사위를 선택하고 친구와 5라운드 대결!</p>
-</section>
-
+<section class="hero"><h1>Dice Duel</h1><p>6가지 속성 주사위로 최대 5라운드 대결!</p></section>
 <section id="lobby" class="panel">
 <h2 class="panelTitle">🎲 Dice Duel 시작</h2>
 <input id="nickname" maxlength="12" autocomplete="off" placeholder="닉네임을 입력하세요">
-<div class="actions">
-<button id="createBtn" class="primary">방 만들기</button>
-<button id="showJoinBtn" class="secondary">방 참가</button>
-</div>
-<div id="joinBox" class="joinBox">
-<input id="roomInput" maxlength="4" inputmode="numeric" placeholder="4자리 방 코드">
-<button id="joinBtn" class="primary full" style="margin-top:10px">참가하기</button>
-</div>
+<div class="actions"><button id="createBtn" class="primary">방 만들기</button><button id="showJoinBtn" class="secondary">방 참가</button></div>
+<div id="joinBox" class="joinBox"><input id="roomInput" maxlength="4" inputmode="numeric" placeholder="4자리 방 코드"><button id="joinBtn" class="primary full" style="margin-top:10px">참가하기</button></div>
 <div id="lobbyStatus" class="status">닉네임을 입력하고 방을 만들어보세요.</div>
 </section>
-
 <section id="waiting" class="panel" style="display:none">
 <div class="roomCode"><small>방 코드</small><strong id="roomCodeText">----</strong><br><button id="copyRoomBtn" class="secondary copyButton">코드 복사</button></div>
 <h2 class="panelTitle">👥 플레이어</h2>
-<div class="players">
-<div id="player1Box" class="player"><div id="player1Name" class="playerName">대기 중</div><div class="playerRole">PLAYER 1 · HOST</div></div>
-<div id="player2Box" class="player"><div id="player2Name" class="playerName">대기 중</div><div class="playerRole">PLAYER 2</div></div>
-</div>
+<div class="players"><div id="player1Box" class="player"><div id="player1Name" class="playerName">대기 중</div><div class="playerRole">PLAYER 1 · HOST</div></div><div id="player2Box" class="player"><div id="player2Name" class="playerName">대기 중</div><div class="playerRole">PLAYER 2</div></div></div>
 <div id="waitingStatus" class="status">친구에게 방 코드를 알려주세요.</div>
-<div id="choiceSection" style="display:none;margin-top:22px">
-<h2 class="panelTitle">🧩 내 주사위 선택</h2>
-<div id="dieGrid" class="dieGrid"></div>
-<div id="choiceStatus" class="status">주사위를 선택하세요.</div>
-</div>
-<div class="waitingActions">
-<button id="startBtn" class="primary" disabled>게임 시작</button>
-</div>
+<div id="choiceSection" style="display:none;margin-top:22px"><h2 class="panelTitle">🧩 내 주사위 선택</h2><div id="dieGrid" class="dieGrid"></div><div id="choiceStatus" class="status">주사위를 선택하세요.</div></div>
+<div class="waitingActions"><button id="startBtn" class="primary" disabled>게임 시작 · 5라운드</button></div>
 </section>
-
-<section id="game" class="game">
-<div class="panel">
+<section id="game" class="game"><div class="panel">
 <div class="topInfo"><div class="roomMini">ROOM <strong id="miniRoomCode">----</strong></div><div id="roundText" class="round">ROUND 1 / 5</div></div>
-<div class="scoreboard">
-<div id="scoreCard1" class="scoreCard"><div id="gameName1" class="scoreName">PLAYER 1</div><div id="gameScore1" class="scoreNumber">0</div></div>
-<div class="vs">VS</div>
-<div id="scoreCard2" class="scoreCard"><div id="gameName2" class="scoreName">PLAYER 2</div><div id="gameScore2" class="scoreNumber">0</div></div>
-</div>
-
+<div class="scoreboard"><div id="scoreCard1" class="scoreCard"><div id="gameName1" class="scoreName">PLAYER 1</div><div id="gameScore1" class="scoreNumber">0</div></div><div class="vs">VS</div><div id="scoreCard2" class="scoreCard"><div id="gameName2" class="scoreName">PLAYER 2</div><div id="gameScore2" class="scoreNumber">0</div></div></div>
 <div class="diceArea">
-<div class="diceBox">
-<h3 id="diceName1">PLAYER 1</h3>
-<div id="dieType1" class="dieTypeLabel">-</div>
-<div id="dice1" class="dice" data-value="1">
-<span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+<div class="diceBox"><h3 id="diceName1">PLAYER 1</h3><div id="dieType1" class="dieTypeLabel">-</div><div id="dice1" class="dice" data-value="1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState1" class="rollState">아직 굴리지 않음</div></div>
+<div class="diceBox"><h3 id="diceName2">PLAYER 2</h3><div id="dieType2" class="dieTypeLabel">-</div><div id="dice2" class="dice" data-value="1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState2" class="rollState">아직 굴리지 않음</div></div>
 </div>
-<div id="rollState1" class="rollState">아직 굴리지 않음</div>
-</div>
-<div class="diceBox">
-<h3 id="diceName2">PLAYER 2</h3>
-<div id="dieType2" class="dieTypeLabel">-</div>
-<div id="dice2" class="dice" data-value="1">
-<span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-</div>
-<div id="rollState2" class="rollState">아직 굴리지 않음</div>
-</div>
-</div>
-
 <div id="result" class="result">각자의 주사위를 굴려주세요!</div>
-
-<div class="rollArea">
-<button id="rollBtn" class="primary">🎲 내 주사위 굴리기</button>
-</div>
-
-<div id="nextArea" class="nextArea" style="display:none">
-<small>두 플레이어가 모두 굴렸습니다.</small>
-<button id="nextBtn" class="primary">다음 라운드 →</button>
-</div>
-
-<div id="gameHelp" class="gameHelp">각자 한 번씩 주사위를 굴릴 수 있습니다.</div>
-</div>
-</section>
+<div class="rollArea"><button id="rollBtn" class="primary">🎲 내 주사위 굴리기</button></div>
+<div id="roundResult" class="roundResult" style="display:none"></div>
+<div id="gameHelp" class="gameHelp">각자 한 번씩 주사위를 굴립니다.</div>
+</div></section>
 </main>
-
-<div id="overlay" class="overlay">
-<div class="modal">
-<div id="modalEmoji" class="modalEmoji">🏆</div>
-<h2 id="winnerTitle">승리!</h2>
-<p id="winnerText">게임이 끝났습니다.</p>
-<div class="modalActions">
-<button id="rematchBtn" class="primary">다시 대결</button>
-<button id="leaveBtn" class="secondary">로비</button>
-</div>
-</div>
-</div>
+<div id="overlay" class="overlay"><div class="modal"><div id="modalEmoji" class="modalEmoji">🏆</div><h2 id="winnerTitle">승리!</h2><p id="winnerText">게임이 끝났습니다.</p><div class="modalActions"><button id="rematchBtn" class="primary">다시 대결</button><button id="leaveBtn" class="secondary">로비</button></div></div></div>
 
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import {getDatabase,ref,set,get,update,onValue,onDisconnect} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import{getDatabase,ref,set,get,update,onValue,onDisconnect}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyBreTSe1m0-xlbF4aupnU5isRZCihR25IE",
-authDomain:"formwheel.firebaseapp.com",
-databaseURL:"https://formwheel-default-rtdb.firebaseio.com",
-projectId:"formwheel",
-storageBucket:"formwheel.firebasestorage.app",
-messagingSenderId:"431583088241",
-appId:"1:431583088241:web:74e0e34ea1e3e1170c55d0",
-measurementId:"G-T372YXDF8D"
-};
-
-const app=initializeApp(firebaseConfig);
-const db=getDatabase(app);
-const MAX_ROUNDS=5;
-const ROOT="diceDuel";
+const firebaseConfig={apiKey:"AIzaSyBreTSe1m0-xlbF4aupnU5isRZCihR25IE",authDomain:"formwheel.firebaseapp.com",databaseURL:"https://formwheel-default-rtdb.firebaseio.com",projectId:"formwheel",storageBucket:"formwheel.firebasestorage.app",messagingSenderId:"431583088241",appId:"1:431583088241:web:74e0e34ea1e3e1170c55d0",measurementId:"G-T372YXDF8D"};
+const app=initializeApp(firebaseConfig),db=getDatabase(app);
+const MAX_ROUNDS=5,ROOT="diceDuel";
 
 const DICE={
-flame:{name:"화염 주사위",icon:"🔥",desc:"7이 나올 가중치가 10% 증가합니다."},
-ice:{name:"얼음 주사위",icon:"❄️",desc:"상대의 X(0) 가중치가 10% 증가합니다."},
-electric:{name:"전기 주사위",icon:"⚡",desc:"내 주사위에서 1이 나오지 않습니다."},
-poison:{name:"독 주사위",icon:"☠️",desc:"상대의 3~6 중 하나가 무작위로 나오지 않습니다."},
-wind:{name:"바람 주사위",icon:"🌪️",desc:"내 주사위에서 X(0)가 나오지 않습니다."},
-gold:{name:"황금 주사위",icon:"✨",desc:"5와 6의 가중치가 각각 10% 증가합니다."}
+flame:{name:"화염 주사위",icon:"🔥",desc:"7 가중치 +10%",counter:"wind"},
+ice:{name:"얼음 주사위",icon:"❄️",desc:"상대 X(0) 가중치 +10%",counter:"flame"},
+electric:{name:"전기 주사위",icon:"⚡",desc:"내 1 제거",counter:"ice"},
+poison:{name:"독 주사위",icon:"☠️",desc:"상대 3~6 중 하나 봉쇄",counter:"electric"},
+wind:{name:"바람 주사위",icon:"🌪️",desc:"내 X(0) 제거",counter:"poison"},
+gold:{name:"황금 주사위",icon:"✨",desc:"5·6 가중치 +10%",counter:null}
 };
 
-let myId="",myRole="",myNickname="",currentRoom="",roomData=null,roomListener=null,lastRollSeen=0,animating=false;
-
+let myId="",myRole="",myNickname="",currentRoom="",roomData=null,roomListener=null,lastRollSeen="",resolvingRound=false,animating=false,winnerShown=false;
 const $=id=>document.getElementById(id);
-const lobby=$("lobby"),waiting=$("waiting"),game=$("game");
-const nickname=$("nickname"),roomInput=$("roomInput"),lobbyStatus=$("lobbyStatus"),joinBox=$("joinBox");
-const createBtn=$("createBtn"),showJoinBtn=$("showJoinBtn"),joinBtn=$("joinBtn");
-const roomCodeText=$("roomCodeText"),copyRoomBtn=$("copyRoomBtn");
-const player1Name=$("player1Name"),player2Name=$("player2Name"),player1Box=$("player1Box"),player2Box=$("player2Box");
-const waitingStatus=$("waitingStatus"),choiceSection=$("choiceSection"),dieGrid=$("dieGrid"),choiceStatus=$("choiceStatus"),startBtn=$("startBtn");
-const miniRoomCode=$("miniRoomCode"),roundText=$("roundText"),gameName1=$("gameName1"),gameName2=$("gameName2"),gameScore1=$("gameScore1"),gameScore2=$("gameScore2");
-const dice1=$("dice1"),dice2=$("dice2"),diceName1=$("diceName1"),diceName2=$("diceName2"),dieType1=$("dieType1"),dieType2=$("dieType2");
-const rollState1=$("rollState1"),rollState2=$("rollState2"),result=$("result"),rollBtn=$("rollBtn"),nextArea=$("nextArea"),nextBtn=$("nextBtn"),gameHelp=$("gameHelp");
+const lobby=$("lobby"),waiting=$("waiting"),game=$("game"),nickname=$("nickname"),roomInput=$("roomInput"),lobbyStatus=$("lobbyStatus"),joinBox=$("joinBox");
+const createBtn=$("createBtn"),showJoinBtn=$("showJoinBtn"),joinBtn=$("joinBtn"),roomCodeText=$("roomCodeText"),copyRoomBtn=$("copyRoomBtn");
+const player1Name=$("player1Name"),player2Name=$("player2Name"),player1Box=$("player1Box"),player2Box=$("player2Box"),waitingStatus=$("waitingStatus"),choiceSection=$("choiceSection"),dieGrid=$("dieGrid"),choiceStatus=$("choiceStatus"),startBtn=$("startBtn");
+const miniRoomCode=$("miniRoomCode"),roundText=$("roundText"),gameName1=$("gameName1"),gameName2=$("gameName2"),gameScore1=$("gameScore1"),gameScore2=$("gameScore2"),dice1=$("dice1"),dice2=$("dice2"),diceName1=$("diceName1"),diceName2=$("diceName2"),dieType1=$("dieType1"),dieType2=$("dieType2"),rollState1=$("rollState1"),rollState2=$("rollState2"),result=$("result"),rollBtn=$("rollBtn"),roundResult=$("roundResult"),gameHelp=$("gameHelp");
 const overlay=$("overlay"),modalEmoji=$("modalEmoji"),winnerTitle=$("winnerTitle"),winnerText=$("winnerText"),rematchBtn=$("rematchBtn"),leaveBtn=$("leaveBtn");
 
 function randomRoom(){return String(Math.floor(1000+Math.random()*9000))}
@@ -230,257 +111,200 @@ function roomRef(){return ref(db,ROOT+"/"+currentRoom)}
 function nick(){return nickname.value.trim().replace(/\s+/g," ").slice(0,12)}
 function status(el,msg,type=""){el.textContent=msg;el.className="status"+(type?" "+type:"")}
 function playerNo(){return myRole==="host"?1:2}
-function myDie(){return roomData?.["player"+playerNo()]?.die||"flame"}
+function outcomeText(v){return v===0?"X":String(v)}
+function setDice(el,v){el.dataset.value=String(v)}
 
 function renderDieChoices(){
 dieGrid.innerHTML="";
 Object.entries(DICE).forEach(([key,d])=>{
-const card=document.createElement("div");
-card.className="dieCard";
-card.dataset.key=key;
-card.innerHTML=`<div class="dieTop"><span class="dieIcon">${d.icon}</span><span class="dieName">${d.name}</span><span class="selectedBadge" style="display:none">선택</span></div><div class="dieDesc">${d.desc}</div>`;
-card.onclick=()=>selectDie(key);
-dieGrid.appendChild(card);
+const card=document.createElement("div");card.className="dieCard";card.dataset.key=key;
+card.innerHTML='<div class="dieTop"><span class="dieIcon">'+d.icon+'</span><span class="dieName">'+d.name+'</span><span class="selectedBadge" style="display:none">선택</span></div><div class="dieDesc">'+d.desc+'</div>';
+card.onclick=()=>selectDie(key);dieGrid.appendChild(card);
 });
 }
-
 async function selectDie(key){
 if(!roomData||roomData.status!=="waiting")return;
-const n=playerNo();
-try{
-await update(ref(db,ROOT+"/"+currentRoom+"/player"+n),{die:key});
-}catch(e){console.error(e);status(choiceStatus,"주사위 선택에 실패했습니다.","error")}
+try{await update(ref(db,ROOT+"/"+currentRoom+"/player"+playerNo()),{die:key})}
+catch(e){console.error(e);status(choiceStatus,"주사위 선택에 실패했습니다.","error")}
 }
 function updateChoiceUI(){
 if(!roomData)return;
 const selected=roomData["player"+playerNo()]?.die;
-document.querySelectorAll(".dieCard").forEach(c=>{
-const yes=!!selected&&c.dataset.key===selected;
-c.classList.toggle("selected",yes);
-c.querySelector(".selectedBadge").style.display=yes?"inline-block":"none";
-});
-choiceStatus.textContent=selected?`${DICE[selected].icon} ${DICE[selected].name} 선택 완료!`:"주사위를 선택하세요.";
+document.querySelectorAll(".dieCard").forEach(c=>{const yes=!!selected&&c.dataset.key===selected;c.classList.toggle("selected",yes);c.querySelector(".selectedBadge").style.display=yes?"inline-block":"none"});
+choiceStatus.textContent=selected?DICE[selected].icon+" "+DICE[selected].name+" 선택 완료!":"주사위를 선택하세요.";
 choiceStatus.className="status"+(selected?" success":"");
 }
 
-function setDice(el,v){el.dataset.value=String(v)}
-function outcomeText(v){return v===0?"X":String(v)}
 function weightedRoll(selfDie,opponentDie){
-let weights={0:1,1:1,2:1,3:1,4:1,5:1,6:1,7:1};
-
+const weights={0:1,1:1,2:1,3:1,4:1,5:1,6:1,7:1};
+const self=DICE[selfDie];
 if(selfDie==="flame")weights[7]*=1.10;
 if(selfDie==="electric")weights[1]=0;
 if(selfDie==="wind")weights[0]=0;
 if(selfDie==="gold"){weights[5]*=1.10;weights[6]*=1.10}
-
 if(opponentDie==="ice")weights[0]*=1.10;
-if(opponentDie==="poison"){
-const candidates=[3,4,5,6];
-const blocked=candidates[Math.floor(Math.random()*candidates.length)];
-weights[blocked]=0;
-}
-
-let total=Object.values(weights).reduce((a,b)=>a+b,0);
+if(opponentDie==="poison"){const blocked=[3,4,5,6][Math.floor(Math.random()*4)];weights[blocked]=0}
+if(self&&self.counter===opponentDie)[5,6,7].forEach(v=>weights[v]*=1.10);
+const total=Object.values(weights).reduce((a,b)=>a+b,0);
 let r=Math.random()*total;
-for(const [k,w] of Object.entries(weights)){
-r-=w;if(r<0)return Number(k);
-}
+for(const[k,w]of Object.entries(weights)){r-=w;if(r<0)return Number(k)}
 return 0;
 }
 
 function animateDice(el,finalValue){
-if(animating)return;
-el.classList.add("rolling");
+el.classList.remove("rolling");void el.offsetWidth;el.classList.add("rolling");
 let count=0;
 const timer=setInterval(()=>{
-setDice(el,Math.floor(Math.random()*8));
-count++;
-if(count>=6){
-clearInterval(timer);
-setDice(el,finalValue);
-el.classList.remove("rolling");
+setDice(el,Math.floor(Math.random()*8));count++;
+if(count>=8){clearInterval(timer);setDice(el,finalValue);setTimeout(()=>el.classList.remove("rolling"),120)}
+},75);
 }
-},85);
+function showRoundAnimation(msg){
+roundResult.style.display="block";roundResult.textContent=msg;
+setTimeout(()=>{if(roundResult)roundResult.style.display="none"},850);
 }
 
 function updateWaiting(){
 if(!roomData)return;
-player1Name.textContent=roomData.player1?.nickname||"대기 중";
-player2Name.textContent=roomData.player2?.nickname||"대기 중";
-player1Box.classList.toggle("me",myRole==="host");
-player2Box.classList.toggle("me",myRole==="player");
-const ready=!!roomData.player1&&!!roomData.player2;
-choiceSection.style.display=ready?"block":"none";
-if(ready){
+player1Name.textContent=roomData.player1?.nickname||"대기 중";player2Name.textContent=roomData.player2?.nickname||"대기 중";
+player1Box.classList.toggle("me",myRole==="host");player2Box.classList.toggle("me",myRole==="player");
+const ready=!!roomData.player1&&!!roomData.player2;choiceSection.style.display=ready?"block":"none";
+if(!ready){startBtn.disabled=true;status(waitingStatus,"친구에게 4자리 방 코드를 알려주세요.");return}
 updateChoiceUI();
 const bothChosen=!!roomData.player1.die&&!!roomData.player2.die;
-if(myRole==="host"){
-startBtn.style.display="inline-block";
-startBtn.disabled=!bothChosen;
-status(waitingStatus,bothChosen?"두 플레이어의 주사위가 준비되었습니다!":"각자 사용할 주사위를 선택해주세요.",bothChosen?"success":"");
-}else{
-startBtn.style.display="none";
-status(waitingStatus,bothChosen?"호스트가 게임을 시작하기를 기다리는 중...":"두 플레이어가 주사위를 선택해주세요.",bothChosen?"success":"");
-}
-}else{
-startBtn.style.display="inline-block";startBtn.disabled=true;
-status(waitingStatus,"친구에게 4자리 방 코드를 알려주세요.");
-}
+if(myRole==="host"){startBtn.style.display="inline-block";startBtn.disabled=!bothChosen;status(waitingStatus,bothChosen?"두 플레이어의 주사위가 준비되었습니다!":"각자 사용할 주사위를 선택해주세요.",bothChosen?"success":"")}
+else{startBtn.style.display="none";status(waitingStatus,bothChosen?"호스트가 게임을 시작하기를 기다리는 중...":"두 플레이어가 주사위를 선택해주세요.",bothChosen?"success":"")}
 }
 
 function updateGame(){
 if(!roomData||!["playing","finished"].includes(roomData.status))return;
 waiting.style.display="none";lobby.style.display="none";game.classList.add("show");
-miniRoomCode.textContent=currentRoom;
-gameName1.textContent=roomData.player1?.nickname||"PLAYER 1";
-gameName2.textContent=roomData.player2?.nickname||"PLAYER 2";
-gameScore1.textContent=roomData.player1?.score||0;
-gameScore2.textContent=roomData.player2?.score||0;
-diceName1.textContent=roomData.player1?.nickname||"PLAYER 1";
-diceName2.textContent=roomData.player2?.nickname||"PLAYER 2";
-dieType1.textContent=DICE[roomData.player1?.die]?.icon+" "+DICE[roomData.player1?.die]?.name;
-dieType2.textContent=DICE[roomData.player2?.die]?.icon+" "+DICE[roomData.player2?.die]?.name;
-roundText.textContent=`ROUND ${roomData.round||1} / ${MAX_ROUNDS}`;
+miniRoomCode.textContent=currentRoom;gameName1.textContent=roomData.player1?.nickname||"PLAYER 1";gameName2.textContent=roomData.player2?.nickname||"PLAYER 2";
+gameScore1.textContent=roomData.player1?.score||0;gameScore2.textContent=roomData.player2?.score||0;
+diceName1.textContent=roomData.player1?.nickname||"PLAYER 1";diceName2.textContent=roomData.player2?.nickname||"PLAYER 2";
+dieType1.textContent=(DICE[roomData.player1?.die]?.icon||"")+" "+(DICE[roomData.player1?.die]?.name||"-");
+dieType2.textContent=(DICE[roomData.player2?.die]?.icon||"")+" "+(DICE[roomData.player2?.die]?.name||"-");
+roundText.textContent="ROUND "+(roomData.round||1)+" / "+MAX_ROUNDS;
 
 if(roomData.dice1!==null&&roomData.dice1!==undefined)setDice(dice1,roomData.dice1);
 if(roomData.dice2!==null&&roomData.dice2!==undefined)setDice(dice2,roomData.dice2);
-
 const r=roomData.roundResults||{};
-rollState1.textContent=r["1"]===null||r["1"]===undefined?"아직 굴리지 않음":`결과: ${outcomeText(r["1"])}`;
-rollState2.textContent=r["2"]===null||r["2"]===undefined?"아직 굴리지 않음":`결과: ${outcomeText(r["2"])}`;
+rollState1.textContent=r["1"]==null?"아직 굴리지 않음":"결과: "+outcomeText(r["1"]);
+rollState2.textContent=r["2"]==null?"아직 굴리지 않음":"결과: "+outcomeText(r["2"]);
 
 if(roomData.lastRollEvent&&roomData.lastRollEvent!==lastRollSeen){
 lastRollSeen=roomData.lastRollEvent;
-const who=roomData.lastRollPlayer;
-animateDice(who===1?dice1:dice2,who===1?roomData.dice1:roomData.dice2);
+const who=roomData.lastRollPlayer,value=who===1?roomData.dice1:roomData.dice2;
+if(value!==null&&value!==undefined)animateDice(who===1?dice1:dice2,value);
 }
-
 result.textContent=roomData.lastResult||"각자의 주사위를 굴려주세요!";
-const me=playerNo(),mine=roomData.roundResults?.[String(me)];
-const other=roomData.roundResults?.[String(me===1?2:1)];
-rollBtn.disabled=mine!==null&&mine!==undefined;
-nextArea.style.display=(roomData.roundResults?.["1"]!==null&&roomData.roundResults?.["1"]!==undefined&&roomData.roundResults?.["2"]!==null&&roomData.roundResults?.["2"]!==undefined)?"block":"none";
-nextBtn.disabled=myRole!=="host"||nextArea.style.display==="none";
-gameHelp.textContent=myRole==="host"?"각자 한 번씩 굴린 뒤, 결과를 확인하고 '다음 라운드'를 눌러주세요.":"내 주사위를 한 번 굴려주세요. 호스트가 다음 라운드를 진행합니다.";
+const me=playerNo(),mine=r[String(me)];
+rollBtn.disabled=mine!=null||roomData.roundState==="resolving"||roomData.status==="finished";
+gameHelp.textContent=roomData.roundState==="resolving"?"라운드 결과를 계산하는 중...":"두 플레이어가 모두 굴리면 라운드가 자동 처리됩니다.";
 
+if(r["1"]!=null&&r["2"]!=null&&myRole==="host"&&roomData.roundState==="rolling")resolveRound();
 if(roomData.status==="finished")showWinner();
 }
 
 async function createRoom(){
 const n=nick();if(!n){status(lobbyStatus,"닉네임을 먼저 입력해주세요.","error");nickname.focus();return}
-createBtn.disabled=true;status(lobbyStatus,"방을 만드는 중...");
+createBtn.disabled=true;status(lobbyStatus,"Firebase에 방을 만드는 중...");
 try{
-let code=null;
-for(let i=0;i<20;i++){const c=randomRoom();const s=await get(ref(db,ROOT+"/"+c));if(!s.exists()){code=c;break}}
+let code=null;for(let i=0;i<20;i++){const c=randomRoom(),s=await get(ref(db,ROOT+"/"+c));if(!s.exists()){code=c;break}}
 if(!code)throw new Error("방 번호 생성 실패");
 myId=makeId("host");myRole="host";myNickname=n;currentRoom=code;
-await set(roomRef(),{status:"waiting",hostId:myId,player1:{id:myId,nickname:n,score:0,die:null,connected:true},player2:null,round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"",lastRollEvent:0,lastRollPlayer:0});
-await onDisconnect(ref(db,ROOT+"/"+currentRoom+"/player1/connected")).set(false);
-enterWaiting();listen();
-}catch(e){console.error(e);status(lobbyStatus,"방 생성에 실패했습니다. Firebase Database 규칙을 확인해주세요.","error");createBtn.disabled=false}
+await set(roomRef(),{status:"waiting",roundState:"waiting",roundWinner:0,hostId:myId,player1:{id:myId,nickname:n,score:0,die:null,connected:true},player2:null,round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"",lastRollEvent:"",lastRollPlayer:0});
+await onDisconnect(ref(db,ROOT+"/"+currentRoom+"/player1/connected")).set(false);enterWaiting();listen();
+}catch(e){console.error(e);status(lobbyStatus,"Firebase 연결/권한을 확인해주세요. "+(e.message||""),"error");createBtn.disabled=false}
 }
 
 async function joinRoom(){
 const n=nick(),code=roomInput.value.replace(/\D/g,"").slice(0,4);roomInput.value=code;
-if(!n){status(lobbyStatus,"닉네임을 먼저 입력해주세요.","error");nickname.focus();return}
+if(!n){status(lobbyStatus,"닉네임을 먼저 입력해주세요.","error");return}
 if(!/^\d{4}$/.test(code)){status(lobbyStatus,"4자리 방 코드를 입력해주세요.","error");return}
 joinBtn.disabled=true;status(lobbyStatus,"방을 확인하는 중...");
 try{
-const rr=ref(db,ROOT+"/"+code),s=await get(rr);
-if(!s.exists())throw new Error("존재하지 않는 방입니다.");
-const d=s.val();
-if(d.status!=="waiting")throw new Error("이미 시작된 게임입니다.");
-if(d.player2)throw new Error("이미 2명이 참가한 방입니다.");
+const rr=ref(db,ROOT+"/"+code),s=await get(rr);if(!s.exists())throw new Error("존재하지 않는 방입니다.");
+const d=s.val();if(d.status!=="waiting")throw new Error("이미 시작된 게임입니다.");if(d.player2)throw new Error("이미 2명이 참가한 방입니다.");
 myId=makeId("player");myRole="player";myNickname=n;currentRoom=code;
 await update(rr,{player2:{id:myId,nickname:n,score:0,die:null,connected:true}});
-await onDisconnect(ref(db,ROOT+"/"+currentRoom+"/player2/connected")).set(false);
-enterWaiting();listen();
+await onDisconnect(ref(db,ROOT+"/"+currentRoom+"/player2/connected")).set(false);enterWaiting();listen();
 }catch(e){console.error(e);status(lobbyStatus,e.message||"참가 실패","error");joinBtn.disabled=false}
 }
 
-function enterWaiting(){
-lobby.style.display="none";waiting.style.display="block";game.classList.remove("show");
-roomCodeText.textContent=currentRoom;renderDieChoices();updateWaiting();
-}
+function enterWaiting(){lobby.style.display="none";waiting.style.display="block";game.classList.remove("show");roomCodeText.textContent=currentRoom;renderDieChoices();updateWaiting()}
 function listen(){
 if(roomListener)roomListener();
 roomListener=onValue(roomRef(),s=>{
 if(!s.exists()){alert("방이 삭제되었습니다.");location.reload();return}
 roomData=s.val();updateWaiting();updateGame();
-},e=>{console.error(e);});
+},e=>{console.error(e);status(lobbyStatus,"Firebase 동기화 오류: "+e.message,"error")});
 }
 
 async function startGame(){
 if(myRole!=="host"||!roomData?.player2?.die||!roomData?.player1?.die)return;
 startBtn.disabled=true;
-await update(roomRef(),{
-status:"playing",round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"각자의 주사위를 굴려주세요!",lastRollEvent:0,lastRollPlayer:0,
-"player1/score":0,"player2/score":0
-});
+await update(roomRef(),{status:"playing",roundState:"rolling",roundWinner:0,round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"ROUND 1 / 5 — 각자의 주사위를 굴려주세요!",lastRollEvent:"",lastRollPlayer:0,"player1/score":0,"player2/score":0});
 }
 
 async function rollMine(){
-if(!roomData||roomData.status!=="playing"||animating)return;
-const n=playerNo();
-if(roomData.roundResults?.[String(n)]!==null&&roomData.roundResults?.[String(n)]!==undefined)return;
-const self=roomData["player"+n].die;
-const opp=roomData["player"+(n===1?2:1)].die;
-const value=weightedRoll(self,opp);
-animating=true;rollBtn.disabled=true;
-const updates={};
-updates["dice"+n]=value;
-updates["roundResults/"+n]=value;
-updates.lastRollEvent=Date.now();
-updates.lastRollPlayer=n;
-updates.lastResult=`${roomData["player"+n].nickname}이(가) 주사위를 굴렸습니다!`;
+if(!roomData||roomData.status!=="playing"||roomData.roundState!=="rolling"||animating)return;
+const n=playerNo(),key=String(n);
+if(roomData.roundResults?.[key]!=null)return;
+const self=roomData["player"+n]?.die,opp=roomData["player"+(n===1?2:1)]?.die;if(!self||!opp)return;
+const value=weightedRoll(self,opp);animating=true;rollBtn.disabled=true;
+const eventId=(roomData.round||1)+"-"+n+"-"+Date.now()+"-"+Math.random().toString(36).slice(2,7);
+try{
+const fresh=await get(roomRef());if(!fresh.exists())return;
+const d=fresh.val();if(d.status!=="playing"||d.roundState!=="rolling"||d.roundResults?.[key]!=null)return;
+const updates={};updates["dice"+n]=value;updates["roundResults/"+n]=value;updates.lastRollEvent=eventId;updates.lastRollPlayer=n;updates.lastResult=d["player"+n].nickname+"이(가) 주사위를 굴렸습니다!";
 await update(roomRef(),updates);
-setTimeout(()=>{animating=false},650);
+}finally{setTimeout(()=>animating=false,700)}
 }
 
-async function nextRound(){
-if(myRole!=="host"||!roomData||roomData.status!=="playing")return;
-const a=roomData.roundResults?.["1"],b=roomData.roundResults?.["2"];
-if(a===null||a===undefined||b===null||b===undefined)return;
-let s1=roomData.player1.score||0,s2=roomData.player2.score||0;
-let msg="";
-if(a>b){s1++;msg=`🏆 ${roomData.player1.nickname} 승리! ${outcomeText(a)} : ${outcomeText(b)}`}
-else if(b>a){s2++;msg=`🏆 ${roomData.player2.nickname} 승리! ${outcomeText(a)} : ${outcomeText(b)}`}
-else msg=`🤝 무승부! ${outcomeText(a)} : ${outcomeText(b)}`;
-const r=roomData.round||1;
-if(r>=MAX_ROUNDS){
-await update(roomRef(),{"player1/score":s1,"player2/score":s2,status:"finished",lastResult:`최종 결과 — ${msg}`,roundResults:{"1":a,"2":b}});
-return;
+async function resolveRound(){
+if(myRole!=="host"||resolvingRound||!roomData||roomData.status!=="playing")return;
+const a=roomData.roundResults?.["1"],b=roomData.roundResults?.["2"];if(a==null||b==null)return;
+resolvingRound=true;
+const round=roomData.round||1;let s1=roomData.player1.score||0,s2=roomData.player2.score||0,msg="";
+if(a>b){s1++;msg="🏆 "+roomData.player1.nickname+" 라운드 승리! "+outcomeText(a)+" : "+outcomeText(b)}
+else if(b>a){s2++;msg="🏆 "+roomData.player2.nickname+" 라운드 승리! "+outcomeText(a)+" : "+outcomeText(b)}
+else msg="🤝 라운드 무승부! "+outcomeText(a)+" : "+outcomeText(b);
+try{
+await update(roomRef(),{roundState:"resolving",roundWinner:a>b?1:b>a?2:0,lastResult:msg,"player1/score":s1,"player2/score":s2});
+showRoundAnimation(msg);
+await new Promise(r=>setTimeout(r,900));
+const fresh=await get(roomRef());if(!fresh.exists())return;const d=fresh.val();
+if(d.status!=="playing"||d.round!==round||d.roundState!=="resolving")return;
+if(round>=MAX_ROUNDS){
+await update(roomRef(),{status:"finished",roundState:"finished",lastResult:"최종 결과: "+s1+" : "+s2,finishedAt:Date.now()});
+}else{
+await update(roomRef(),{round:round+1,roundState:"rolling",roundWinner:0,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastRollEvent:"",lastRollPlayer:0,lastResult:"ROUND "+(round+1)+" / "+MAX_ROUNDS+" — 각자의 주사위를 굴려주세요!"});
 }
-await update(roomRef(),{"player1/score":s1,"player2/score":s2,round:r+1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:`${msg}  다음 라운드!`,lastRollEvent:0,lastRollPlayer:0});
+}finally{resolvingRound=false}
 }
 
 function showWinner(){
+if(winnerShown)return;winnerShown=true;
 const s1=roomData.player1.score||0,s2=roomData.player2.score||0;
-if(s1>s2){modalEmoji.textContent=myRole==="host"?"🏆":"😢";winnerTitle.textContent=`${roomData.player1.nickname} 승리!`}
-else if(s2>s1){modalEmoji.textContent=myRole==="player"?"🏆":"😢";winnerTitle.textContent=`${roomData.player2.nickname} 승리!`}
+if(s1>s2){modalEmoji.textContent=myRole==="host"?"🏆":"😢";winnerTitle.textContent=roomData.player1.nickname+" 승리!"}
+else if(s2>s1){modalEmoji.textContent=myRole==="player"?"🏆":"😢";winnerTitle.textContent=roomData.player2.nickname+" 승리!"}
 else{modalEmoji.textContent="🤝";winnerTitle.textContent="무승부!"}
-winnerText.textContent=`최종 점수 ${s1} : ${s2}`;
+winnerText.textContent="최종 점수 "+s1+" : "+s2+" · 총 "+MAX_ROUNDS+"라운드";
 overlay.classList.add("show");
 }
 
 async function rematch(){
 if(myRole!=="host"||!roomData?.player2){winnerText.textContent="호스트만 다시 대결을 시작할 수 있습니다.";return}
-overlay.classList.remove("show");
-await update(roomRef(),{status:"playing",round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"새로운 대결! 각자의 주사위를 굴려주세요!",lastRollEvent:0,lastRollPlayer:0,"player1/score":0,"player2/score":0});
+winnerShown=false;overlay.classList.remove("show");
+await update(roomRef(),{status:"playing",roundState:"rolling",roundWinner:0,round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"새로운 대결! ROUND 1 / 5",lastRollEvent:"",lastRollPlayer:0,"player1/score":0,"player2/score":0});
 }
 
-createBtn.onclick=createRoom;
-joinBtn.onclick=joinRoom;
+createBtn.onclick=createRoom;joinBtn.onclick=joinRoom;
 showJoinBtn.onclick=()=>{joinBox.style.display=joinBox.style.display==="block"?"none":"block";if(joinBox.style.display==="block")roomInput.focus()};
 copyRoomBtn.onclick=async()=>{try{await navigator.clipboard.writeText(currentRoom);copyRoomBtn.textContent="복사 완료!";setTimeout(()=>copyRoomBtn.textContent="코드 복사",1200)}catch{alert("방 코드: "+currentRoom)}};
-startBtn.onclick=startGame;
-rollBtn.onclick=rollMine;
-nextBtn.onclick=nextRound;
-rematchBtn.onclick=rematch;
-leaveBtn.onclick=()=>location.reload();
-nickname.onkeydown=e=>{if(e.key==="Enter")createRoom()};
-roomInput.onkeydown=e=>{if(e.key==="Enter")joinRoom()};
-roomInput.oninput=()=>roomInput.value=roomInput.value.replace(/\D/g,"").slice(0,4);
+startBtn.onclick=startGame;rollBtn.onclick=rollMine;rematchBtn.onclick=rematch;leaveBtn.onclick=()=>location.reload();
+nickname.onkeydown=e=>{if(e.key==="Enter")createRoom()};roomInput.onkeydown=e=>{if(e.key==="Enter")joinRoom()};roomInput.oninput=()=>roomInput.value=roomInput.value.replace(/\D/g,"").slice(0,4);
 </script>
 </body>
 </html>
