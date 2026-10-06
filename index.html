@@ -44,7 +44,7 @@ button:active{transform:scale(.97)}button:disabled{opacity:.4;cursor:not-allowed
 @keyframes revealRing{0%{transform:scale(.72);opacity:.8}100%{transform:scale(1.18);opacity:0}}
 .dot{width:16px;height:16px;border-radius:50%;background:#17181c;opacity:0;align-self:center;justify-self:center}
 .dice[data-value="0"]:after{content:"0";position:absolute;inset:0;display:grid;place-items:center;font-size:48px;font-weight:900}
-.dice[data-value="0"] .dot:nth-child(1),.dice[data-value="1"] .dot:nth-child(5),.dice[data-value="2"] .dot:nth-child(1),.dice[data-value="2"] .dot:nth-child(9),.dice[data-value="3"] .dot:nth-child(1),.dice[data-value="3"] .dot:nth-child(5),.dice[data-value="3"] .dot:nth-child(9),.dice[data-value="4"] .dot:nth-child(1),.dice[data-value="4"] .dot:nth-child(3),.dice[data-value="4"] .dot:nth-child(7),.dice[data-value="4"] .dot:nth-child(9),.dice[data-value="5"] .dot:nth-child(1),.dice[data-value="5"] .dot:nth-child(3),.dice[data-value="5"] .dot:nth-child(5),.dice[data-value="5"] .dot:nth-child(7),.dice[data-value="5"] .dot:nth-child(9),.dice[data-value="6"] .dot:nth-child(1),.dice[data-value="6"] .dot:nth-child(3),.dice[data-value="6"] .dot:nth-child(4),.dice[data-value="6"] .dot:nth-child(6),.dice[data-value="6"] .dot:nth-child(7),.dice[data-value="6"] .dot:nth-child(9),.dice[data-value="7"] .dot:nth-child(1),.dice[data-value="7"] .dot:nth-child(3),.dice[data-value="7"] .dot:nth-child(5),.dice[data-value="7"] .dot:nth-child(7),.dice[data-value="7"] .dot:nth-child(9){opacity:1}
+.dice[data-value="0"] .dot:nth-child(1),.dice[data-value="1"] .dot:nth-child(5),.dice[data-value="2"] .dot:nth-child(1),.dice[data-value="2"] .dot:nth-child(9),.dice[data-value="3"] .dot:nth-child(1),.dice[data-value="3"] .dot:nth-child(5),.dice[data-value="3"] .dot:nth-child(9),.dice[data-value="4"] .dot:nth-child(1),.dice[data-value="4"] .dot:nth-child(3),.dice[data-value="4"] .dot:nth-child(7),.dice[data-value="4"] .dot:nth-child(9),.dice[data-value="5"] .dot:nth-child(1),.dice[data-value="5"] .dot:nth-child(3),.dice[data-value="5"] .dot:nth-child(5),.dice[data-value="5"] .dot:nth-child(7),.dice[data-value="5"] .dot:nth-child(9),.dice[data-value="6"] .dot:nth-child(1),.dice[data-value="6"] .dot:nth-child(3),.dice[data-value="6"] .dot:nth-child(4),.dice[data-value="6"] .dot:nth-child(6),.dice[data-value="6"] .dot:nth-child(7),.dice[data-value="6"] .dot:nth-child(9),.dice[data-value="7"] .dot:nth-child(1),.dice[data-value="7"] .dot:nth-child(3),.dice[data-value="7"] .dot:nth-child(4),.dice[data-value="7"] .dot:nth-child(5),.dice[data-value="7"] .dot:nth-child(6),.dice[data-value="7"] .dot:nth-child(7),.dice[data-value="7"] .dot:nth-child(9){opacity:1}
 .dice.rolling{animation:roll 1.25s cubic-bezier(.25,.8,.25,1)}
 @keyframes roll{0%{transform:translateY(0) rotate(0) scale(1)}12%{transform:translateY(-12px) rotate(55deg) scale(1.08)}25%{transform:translateY(5px) rotate(-70deg) scale(.92)}40%{transform:translateY(-18px) rotate(125deg) scale(1.1)}55%{transform:translateY(4px) rotate(185deg) scale(.95)}70%{transform:translateY(-12px) rotate(250deg) scale(1.06)}85%{transform:translateY(2px) rotate(320deg) scale(.98)}100%{transform:translateY(0) rotate(360deg) scale(1)}}
 .result{text-align:center;min-height:30px;margin:18px 0;font-size:17px;font-weight:850}.rollArea{text-align:center}.rollState{font-size:13px;color:#858991;margin-top:10px}.gameHelp{text-align:center;color:#898d95;font-size:13px;margin-top:12px}
@@ -231,7 +231,6 @@ return new Promise(resolve=>{
     }
   },78);
 });
-},75);
 }
 function showRoundAnimation(msg){
 roundResult.style.display="block";roundResult.textContent=msg;
@@ -328,19 +327,6 @@ rollState2.textContent="결과: "+outcomeText(r["2"]);
 showRoundAnimation("🎉 ROUND "+roomData.round+" 결과 공개!");
 }
 
-
-function revealRoundResult(){
-const r=roomData?.roundResults||{};
-const key=String(roomData?.round||1);
-if(r["1"]==null||r["2"]==null)return;
-if(!animationDone[1]||!animationDone[2])return;
-if(revealedRoundKey===key)return;
-revealedRoundKey=key;
-rollState1.textContent="결과: "+outcomeText(r["1"]);
-rollState2.textContent="결과: "+outcomeText(r["2"]);
-result.textContent=roomData.lastResult||("결과: "+outcomeText(r["1"])+" : "+outcomeText(r["2"]));
-showRoundAnimation("🎉 ROUND "+roomData.round+" 결과 공개!");
-}
 
 async function createRoom(){
 const n=nick();if(!n){status(lobbyStatus,"닉네임을 먼저 입력해주세요.","error");nickname.focus();return}
