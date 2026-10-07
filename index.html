@@ -111,7 +111,7 @@ window.addEventListener("unhandledrejection",function(e){
 </script>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-import{getDatabase,ref,set,get,update,onValue,onDisconnect}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+import{getDatabase,ref,set,get,update,onValue,onDisconnect,runTransaction}from"https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
 
 const firebaseConfig={apiKey:"AIzaSyBreTSe1m0-xlbF4aupnU5isRZCihR25IE",authDomain:"formwheel.firebaseapp.com",databaseURL:"https://formwheel-default-rtdb.firebaseio.com",projectId:"formwheel",storageBucket:"formwheel.firebasestorage.app",messagingSenderId:"431583088241",appId:"1:431583088241:web:74e0e34ea1e3e1170c55d0",measurementId:"G-T372YXDF8D"};
 const app=initializeApp(firebaseConfig),db=getDatabase(app);
@@ -349,7 +349,11 @@ try{
 const rr=ref(db,ROOT+"/"+code),s=await get(rr);if(!s.exists())throw new Error("존재하지 않는 방입니다.");
 const d=s.val();if(d.status!=="waiting")throw new Error("이미 시작된 게임입니다.");if(d.player2)throw new Error("이미 2명이 참가한 방입니다.");
 myId=makeId("player");myRole="player";myNickname=n;currentRoom=code;
-await update(rr,{player2:{id:myId,nickname:n,score:0,die:null,connected:true}});
+const claim=await runTransaction(rr,d=>{
+ if(d===null)return null;if(d.status!=="waiting"||d.player2)return;
+ d.player2={id:myId,nickname:n,score:0,die:null,connected:true};return d;
+},{applyLocally:false});
+if(!claim.committed||claim.snapshot.val()?.player2?.id!==myId)throw new Error("다른 참가자가 먼저 입장했거나 게임이 시작되었습니다.");
 await onDisconnect(ref(db,ROOT+"/"+currentRoom+"/player2/connected")).set(false);enterWaiting();listen();
 }catch(e){console.error(e);status(lobbyStatus,e.message||"참가 실패","error");joinBtn.disabled=false}
 }
@@ -371,39 +375,43 @@ await update(roomRef(),{status:"playing",roundState:"rolling",roundWinner:0,roun
 
 async function rollMine(){
 if(!roomData||roomData.status!=="playing"||roomData.roundState!=="rolling"||animating)return;
-const n=playerNo(),key=String(n);
+const n=playerNo(),key=String(n),expectedRound=roomData.round;
 if(roomData.roundResults?.[key]!=null)return;
 const self=roomData["player"+n]?.die,opp=roomData["player"+(n===1?2:1)]?.die;if(!self||!opp)return;
 const value=weightedRoll(self,opp);animating=true;rollBtn.disabled=true;
 const eventId=(roomData.round||1)+"-"+n+"-"+Date.now()+"-"+Math.random().toString(36).slice(2,7);
 try{
-const fresh=await get(roomRef());if(!fresh.exists())return;
-const d=fresh.val();if(d.status!=="playing"||d.roundState!=="rolling"||d.roundResults?.[key]!=null)return;
-const updates={};updates["dice"+n]=value;updates["roundResults/"+n]=value;updates.lastRollEvent=eventId;updates.lastRollPlayer=n;updates.lastResult=d["player"+n].nickname+"이(가) 주사위를 굴렸습니다!";
-await update(roomRef(),updates);
+await runTransaction(roomRef(),d=>{
+ if(!d||d.status!=="playing"||d.round!==expectedRound||d.roundState!=="rolling"||d.roundResults?.[key]!=null)return;
+ d["dice"+n]=value;d.roundResults=d.roundResults||{};d.roundResults[key]=value;
+ d.lastRollEvent=eventId;d.lastRollPlayer=n;d.lastResult=d["player"+n].nickname+"이(가) 주사위를 굴렸습니다!";return d;
+},{applyLocally:false});
 }finally{setTimeout(()=>animating=false,700)}
 }
 
 async function resolveRound(){
-if(myRole!=="host"||resolvingRound||!roomData||roomData.status!=="playing")return;
-const a=roomData.roundResults?.["1"],b=roomData.roundResults?.["2"];if(a==null||b==null)return;
-resolvingRound=true;
-const round=roomData.round||1;let s1=roomData.player1.score||0,s2=roomData.player2.score||0,msg="";
-if(a>b){s1++;msg="🏆 "+roomData.player1.nickname+" 라운드 승리! "+outcomeText(a)+" : "+outcomeText(b)}
-else if(b>a){s2++;msg="🏆 "+roomData.player2.nickname+" 라운드 승리! "+outcomeText(a)+" : "+outcomeText(b)}
-else msg="🤝 라운드 무승부! "+outcomeText(a)+" : "+outcomeText(b);
-try{
-await update(roomRef(),{roundState:"resolving",roundWinner:a>b?1:b>a?2:0,lastResult:msg,"player1/score":s1,"player2/score":s2});
-showRoundAnimation(msg);
-await new Promise(r=>setTimeout(r,2200));
-const fresh=await get(roomRef());if(!fresh.exists())return;const d=fresh.val();
-if(d.status!=="playing"||d.round!==round||d.roundState!=="resolving")return;
-if(round>=MAX_ROUNDS){
-await update(roomRef(),{status:"finished",roundState:"finished",lastResult:"최종 결과: "+s1+" : "+s2,finishedAt:Date.now()});
-}else{
-await update(roomRef(),{round:round+1,roundState:"rolling",roundWinner:0,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastRollEvent:"",lastRollPlayer:0,lastResult:"ROUND "+(round+1)+" / "+MAX_ROUNDS+" — 각자의 주사위를 굴려주세요!"});
-}
-}finally{resolvingRound=false}
+ if(myRole!=="host"||resolvingRound||!roomData)return;
+ resolvingRound=true;const expectedRound=roomData.round;
+ try{
+ const settled=await runTransaction(roomRef(),d=>{
+  if(!d||d.status!=="playing"||d.round!==expectedRound||d.roundState!=="rolling")return;
+  const a=d.roundResults?.["1"],b=d.roundResults?.["2"];if(a==null||b==null)return;
+  d.roundWinner=a>b?1:b>a?2:0;
+  if(a>b)d.player1.score=Number(d.player1.score||0)+1;
+  if(b>a)d.player2.score=Number(d.player2.score||0)+1;
+  d.lastResult=a===b?"🤝 라운드 무승부! "+outcomeText(a)+" : "+outcomeText(b):"🏆 "+d["player"+d.roundWinner].nickname+" 라운드 승리! "+outcomeText(a)+" : "+outcomeText(b);
+  d.roundState="resolving";return d;
+ },{applyLocally:false});
+ if(!settled.committed)return;
+ showRoundAnimation(settled.snapshot.val().lastResult);
+ await new Promise(r=>setTimeout(r,2200));
+ await runTransaction(roomRef(),d=>{
+  if(!d||d.status!=="playing"||d.round!==expectedRound||d.roundState!=="resolving")return;
+  if(expectedRound>=MAX_ROUNDS){d.status="finished";d.roundState="finished";d.finishedAt=Date.now();d.lastResult="최종 결과: "+d.player1.score+" : "+d.player2.score;}
+  else{d.round=expectedRound+1;d.roundState="rolling";d.roundWinner=0;d.dice1=null;d.dice2=null;d.roundResults={};d.lastRollEvent="";d.lastRollPlayer=0;d.lastResult="ROUND "+d.round+" / "+MAX_ROUNDS+" — 각자의 주사위를 굴려주세요!";}
+  return d;
+ },{applyLocally:false});
+ }catch(e){status(lobbyStatus,"라운드 저장 실패: "+e.message,"error");}finally{resolvingRound=false}
 }
 
 function showWinner(){
@@ -430,3 +438,4 @@ nickname.onkeydown=e=>{if(e.key==="Enter")createRoom()};roomInput.onkeydown=e=>{
 </script>
 </body>
 </html>
+
