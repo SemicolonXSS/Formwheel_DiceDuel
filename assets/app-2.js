@@ -366,7 +366,7 @@ async function mmTick(){
        await mmCleanup();
        return;
      }
-     await runTransaction(ref(db,mmRoot+"/"+code),v=>v?.claimId===claimId?null:undefined,{applyLocally:false});
+     await runTransaction(ref(db,mmRoot+"/"+code),v=>{if(!v||v.claimId!==claimId)return;delete v.claimId;return v;},{applyLocally:false});
    }
    if(!mmHosting&&!currentRoom){
      await createRoom();
