@@ -349,7 +349,7 @@ async function mmTick(){
      return;
    }
    const snap=await get(ref(db,mmRoot));
-   const entries=Object.entries(snap.val()||{}).filter(([code,v])=>/^\\d{4}$/.test(code)&&v&&v.ownerId&&v.createdAt>Date.now()-120000&&!v.claimId);
+   const entries=Object.entries(snap.val()||{}).filter(([code,v])=>/^\d{4}$/.test(code)&&v&&v.ownerId&&v.createdAt>Date.now()-120000&&!v.claimId);
    for(const [code,entry] of entries){
      const room=(await get(ref(db,"diceDuel/"+code))).val();
      if(!room||room.status!=="waiting"||room.player2||!room.player1?.connected)continue;
