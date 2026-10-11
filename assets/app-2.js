@@ -251,7 +251,7 @@ function listen(){
 if(roomListener)roomListener();
 roomListener=onValue(roomRef(),s=>{
 if(!s.exists()){alert("방이 삭제되었습니다.");location.reload();return}
-roomData=s.val();updateWaiting();updateGame();
+roomData=s.val();if(mmHosting&&(roomData.player2||roomData.status!=="waiting"))mmCleanup();updateWaiting();updateGame();
 },e=>{console.error(e);status(lobbyStatus,"Firebase 동기화 오류: "+e.message,"error")});
 }
 
@@ -317,6 +317,84 @@ if(myRole!=="host"||!roomData?.player2){winnerText.textContent="호스트만 다
 winnerShown=false;overlay.classList.remove("show");
 await update(roomRef(),{status:"playing",roundState:"rolling",roundWinner:0,round:1,dice1:null,dice2:null,roundResults:{"1":null,"2":null},lastResult:"새로운 대결! ROUND 1 / 5",lastRollEvent:"",lastRollPlayer:0,"player1/score":0,"player2/score":0});
 }
+
+
+/* 랜덤 1:1 매칭: 기존 방 코드 입장과 별개인 공개 대기열 */
+const mmRoot="formwheelMatchmaking/diceDuel";
+let mmSearching=false,mmHosting=false,mmTimer=null,mmQueueCode="",mmBusy=false;
+const mmButton=document.createElement("button");
+mmButton.type="button";mmButton.className="secondary";mmButton.textContent="🎲 랜덤 상대 찾기";
+showJoinBtn.parentElement.appendChild(mmButton);
+const mmCancel=document.createElement("button");
+mmCancel.type="button";mmCancel.className="secondary";mmCancel.textContent="매칭 취소";
+mmCancel.style.marginTop="12px";mmCancel.style.display="none";
+waiting.appendChild(mmCancel);
+async function mmCleanup(){
+ if(mmTimer){clearInterval(mmTimer);mmTimer=null}
+ mmSearching=false;mmButton.disabled=false;mmButton.textContent="🎲 랜덤 상대 찾기";
+ if(mmQueueCode){
+   const code=mmQueueCode;mmQueueCode="";
+   try{await runTransaction(ref(db,mmRoot+"/"+code),v=>v?.ownerId===myId?null:undefined,{applyLocally:false})}catch(e){console.warn("대기열 정리 실패",e)}
+ }
+ mmCancel.style.display="none";
+}
+async function mmTick(){
+ if(!mmSearching||mmBusy)return;
+ mmBusy=true;
+ try{
+   if(mmHosting){
+     const room=(await get(roomRef())).val();
+     if(room?.player2 || room?.status!=="waiting"){await mmCleanup();return}
+     status(waitingStatus,"🎲 랜덤 상대를 찾고 있어요. 다른 플레이어가 들어오면 자동 연결됩니다.");
+     return;
+   }
+   const snap=await get(ref(db,mmRoot));
+   const entries=Object.entries(snap.val()||{}).filter(([code,v])=>/^\\d{4}$/.test(code)&&v&&v.ownerId&&v.createdAt>Date.now()-120000&&!v.claimId);
+   for(const [code,entry] of entries){
+     const room=(await get(ref(db,"diceDuel/"+code))).val();
+     if(!room||room.status!=="waiting"||room.player2||!room.player1?.connected)continue;
+     const claimId=makeId("match");
+     const claim=await runTransaction(ref(db,mmRoot+"/"+code),v=>{
+       if(!v||v.ownerId!==entry.ownerId||v.claimId||v.createdAt<Date.now()-120000)return;
+       v.claimId=claimId;return v;
+     },{applyLocally:false});
+     if(!claim.committed)continue;
+     roomInput.value=code;
+     await joinRoom();
+     if(myRole==="player"&&currentRoom===code){
+       await mmCleanup();
+       return;
+     }
+     await runTransaction(ref(db,mmRoot+"/"+code),v=>v?.claimId===claimId?null:undefined,{applyLocally:false});
+   }
+   if(!mmHosting&&!currentRoom){
+     await createRoom();
+     if(myRole!=="host"||!currentRoom)throw new Error("공개 방을 만들지 못했습니다.");
+     mmHosting=true;mmQueueCode=currentRoom;
+     await set(ref(db,mmRoot+"/"+currentRoom),{ownerId:myId,createdAt:Date.now()});
+     await onDisconnect(ref(db,mmRoot+"/"+currentRoom)).remove();
+     mmCancel.style.display="";
+     status(waitingStatus,"🎲 랜덤 매칭 대기 중 · 취소할 수 있어요.");
+   }
+ }catch(e){console.error("랜덤 매칭 오류",e);if(!mmHosting){await mmCleanup();status(lobbyStatus,"매칭에 실패했어요: "+e.message,"error")}else status(waitingStatus,"매칭 연결 오류: "+e.message,"error")}
+ finally{mmBusy=false}
+}
+mmButton.onclick=()=>{
+ if(!nick()){status(lobbyStatus,"닉네임을 먼저 입력해주세요.","error");nickname.focus();return}
+ if(mmSearching)return;
+ mmSearching=true;mmButton.disabled=true;mmButton.textContent="상대 검색 중…";
+ status(lobbyStatus,"🎲 랜덤 상대 검색 중…");
+ mmTick();mmTimer=setInterval(mmTick,2500);
+};
+mmCancel.onclick=async()=>{
+ const code=mmQueueCode;
+ await mmCleanup();
+ if(code){
+   const rr=ref(db,"diceDuel/"+code);
+   await runTransaction(rr,v=>v?.hostId===myId&&!v.player2&&v.status==="waiting"?null:undefined,{applyLocally:false});
+ }
+ location.reload();
+};
 
 createBtn.onclick=createRoom;joinBtn.onclick=joinRoom;
 showJoinBtn.onclick=()=>{joinBox.style.display=joinBox.style.display==="block"?"none":"block";if(joinBox.style.display==="block")roomInput.focus()};
