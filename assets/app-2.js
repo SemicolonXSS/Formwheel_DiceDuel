@@ -345,6 +345,7 @@ async function mmTick(){
    if(mmHosting){
      const room=(await get(roomRef())).val();
      if(room?.player2 || room?.status!=="waiting"){await mmCleanup();return}
+     if(mmQueueCode)await update(ref(db,mmRoot+"/"+mmQueueCode),{createdAt:Date.now()});
      status(waitingStatus,"🎲 랜덤 상대를 찾고 있어요. 다른 플레이어가 들어오면 자동 연결됩니다.");
      return;
    }
