@@ -53,6 +53,10 @@
 <script src="./assets/app.js"></script>
 <script type="module" src="./assets/app-2.js?v=20261011-matchmaking"></script>
 <script type="module" src="https://semicolonxss.github.io/Formwheel/assets/live-presence.js?v=20261017-duration"></script>
+<script>
+/* Secol Random 10 */
+document.addEventListener("DOMContentLoaded",()=>{const box=document.createElement("div");box.style.cssText="border:1px solid #9a8fc5;border-radius:12px;padding:12px;margin:12px";box.innerHTML='<h3>🎉 10탄 주사위 도우미</h3><button id="sr10DiceChallenge">🎯 도전 과제</button> <button id="sr10DiceCoin">🪙 선공 추천</button> <button id="sr10DiceTips">📖 플레이 팁</button><p id="sr10DiceMessage" role="status"></p>';document.getElementById("lobby")?.append(box);const out=document.getElementById("sr10DiceMessage"),pick=a=>a[Math.floor(Math.random()*a.length)];document.getElementById("sr10DiceChallenge").onclick=()=>out.textContent=pick(["첫 라운드에 승리해 보기","3라운드 동안 전략 바꾸기","서로 다른 속성 2개 사용하기","친구와 다시 대결하기"]);document.getElementById("sr10DiceCoin").onclick=()=>out.textContent=Math.random()<.5?"🪙 1P 선공 추천":"🪙 2P 선공 추천";document.getElementById("sr10DiceTips").onclick=()=>out.textContent=pick(["속성별 효과를 보고 선택하세요.","상대가 고른 주사위를 관찰하세요.","결과를 확인하고 다음 라운드 전략을 바꿔보세요."]);});
+</script>
 </body>
 </html>
 
