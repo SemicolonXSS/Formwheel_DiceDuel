@@ -14,15 +14,15 @@
 <link rel="stylesheet" href="assets/formwheel-brand.css?v=20261008-hub-logo">
 <link rel="icon" type="image/svg+xml" href="https://semicolonxss.github.io/Formwheel/assets/formwheel-favicon.svg">
 </head>
-<body><div role="note" style="position:relative;z-index:1;box-sizing:border-box;max-width:58rem;margin:12px auto;padding:10px 13px;border:1px solid #e3bc72;border-radius:10px;background:#fff7e9;color:#624414;font:14px/1.55 system-ui"><strong>🚧 온라인 주사위 대결 공사 중</strong><div>방을 만들거나 참가할 수 없어요.</div></div>
+<body><aside aria-label="온라인 서비스 안내" style="position:relative;z-index:1;box-sizing:border-box;max-width:58rem;margin:12px auto;padding:10px 13px;border:1px solid #e3bc72;border-radius:10px;background:#fff7e9;color:#624414;font:14px/1.55 system-ui"><strong>🚧 온라인 주사위 대결 공사 중</strong><div>방을 만들거나 참가할 수 없어요.</div></aside>
 <header class="header"><a class="logo fw-hub-logo" href="https://semicolonxss.github.io/Formwheel/" aria-label="FormWheel 메인으로 이동"><span class="fw-hub-form">Form</span><span class="fw-hub-icon" aria-hidden="true"></span><span class="fw-hub-wheel">Wheel</span></a></header>
 <main class="container">
 <section class="hero"><h1>Dice Duel</h1><p>10가지 속성 주사위로 최대 5라운드 대결!</p></section>
 <section id="lobby" class="panel">
 <h2 class="panelTitle">🎲 Dice Duel 시작</h2>
-<input id="nickname" maxlength="12" autocomplete="off" placeholder="닉네임을 입력하세요">
+<input id="nickname" maxlength="12" autocomplete="off" placeholder="닉네임을 입력하세요" aria-label="닉네임">
 <div class="actions"><button id="createBtn" class="primary">방 만들기</button><button id="showJoinBtn" class="secondary">방 참가</button></div>
-<div id="joinBox" class="joinBox"><input id="roomInput" maxlength="4" inputmode="numeric" placeholder="4자리 방 코드"><button id="joinBtn" class="primary full" style="margin-top:10px">참가하기</button></div>
+<div id="joinBox" class="joinBox"><input id="roomInput" maxlength="4" inputmode="numeric" placeholder="4자리 방 코드" aria-label="참가할 방 코드"><button id="joinBtn" class="primary full" style="margin-top:10px">참가하기</button></div>
 <div id="lobbyStatus" class="status">닉네임을 입력하고 방을 만들어보세요.</div>
 </section>
 <section id="waiting" class="panel" style="display:none">
@@ -37,8 +37,8 @@
 <div class="topInfo"><div class="roomMini">ROOM <strong id="miniRoomCode">----</strong></div><div id="roundText" class="round">ROUND 1 / 5</div></div>
 <div class="scoreboard"><div id="scoreCard1" class="scoreCard"><div id="gameName1" class="scoreName">PLAYER 1</div><div id="gameScore1" class="scoreNumber">0</div></div><div class="vs">VS</div><div id="scoreCard2" class="scoreCard"><div id="gameName2" class="scoreName">PLAYER 2</div><div id="gameScore2" class="scoreNumber">0</div></div></div>
 <div class="diceArea">
-<div class="diceBox"><h3 id="diceName1">PLAYER 1</h3><div id="dieType1" class="dieTypeLabel">-</div><div id="dice1" class="dice" data-value="1" aria-label="주사위 눈 1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState1" class="rollState">아직 굴리지 않음</div></div>
-<div class="diceBox"><h3 id="diceName2">PLAYER 2</h3><div id="dieType2" class="dieTypeLabel">-</div><div id="dice2" class="dice" data-value="1" aria-label="주사위 눈 1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState2" class="rollState">아직 굴리지 않음</div></div>
+<div class="diceBox"><h3 id="diceName1">PLAYER 1</h3><div id="dieType1" class="dieTypeLabel">-</div><div role="img" id="dice1" class="dice" data-value="1" aria-label="주사위 눈 1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState1" class="rollState">아직 굴리지 않음</div></div>
+<div class="diceBox"><h3 id="diceName2">PLAYER 2</h3><div id="dieType2" class="dieTypeLabel">-</div><div role="img" id="dice2" class="dice" data-value="1" aria-label="주사위 눈 1"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div id="rollState2" class="rollState">아직 굴리지 않음</div></div>
 </div>
 <div id="result" class="result">각자의 주사위를 굴려주세요!</div>
 <div class="rollArea"><button id="rollBtn" class="primary">🎲 내 주사위 굴리기</button></div>
